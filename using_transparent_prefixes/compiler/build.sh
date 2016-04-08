@@ -11,9 +11,9 @@ touch Artifact.sv
 export ANT_OPTS="-Xss80M -Xmx4000M"
 
 
-PATH_TO_ableC="../../../../ableC_Home/ableC"
+PATH_TO_ableC="../../../ableC"
 
-PATH_TO_tables="../../../../ableC_Home/ableC/extensions/conditional-tables"
+PATH_TO_tables="../../../ableC/extensions/conditional-tables"
 
 silver -I ../ \
        -I $PATH_TO_ableC \
