@@ -3,11 +3,10 @@ grammar compiler;
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
 import edu:umn:cs:melt:ableC:drivers:parseAndPrint;
 
+import edu:umn:cs:melt:exts:ableC:tables;
+import bogus_table;
 
---import edu:umn:cs:melt:exts:ableC:tables;
---import bogus_table;
-
-terminal Bogus_t 'bogus' lexer classes {Ckeyword};
+terminal Bogus_t 'bogus:';
 
 disambiguate TableKwd_t, Table_t {
   pluck Table_t;
