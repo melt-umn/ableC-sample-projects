@@ -10,7 +10,7 @@ int main() {
     printf("Correct.\n");
     return 0;
   } else {
-    printf("Incorret.\n");
+    printf("Incorrect.\n");
     return 1;
   }
 }
