@@ -98,9 +98,9 @@ disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:tableExpr
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;
 
-  edu:umn:cs:melt:exts:ableC:tables prefix 'BT:';
+  edu:umn:cs:melt:exts:ableC:tables prefix with 'BT:';
 
-  bogus_table prefix 'CT:';
+  bogus_table prefix with 'CT:';
 }
 
 
