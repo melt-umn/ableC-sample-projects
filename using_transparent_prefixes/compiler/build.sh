@@ -20,3 +20,4 @@ silver -I ../ \
        -I $PATH_TO_tables \
        -o ableC.jar $@ compiler
 
+rm -f build.xml
