@@ -95,12 +95,14 @@ parser extendedParser :: cst:Root {
 disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t
 { pluck edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t; }
 
+prefix separator ":"; -- TODO: Move to ableC source
+
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;
 
-  edu:umn:cs:melt:exts:ableC:tables prefix with 'BT:';
+  edu:umn:cs:melt:exts:ableC:tables prefix bogus_table:TableKwd_t with "BT";
 
-  bogus_table prefix with 'CT:';
+  bogus_table prefix edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t with "CT";
 }
 
 
