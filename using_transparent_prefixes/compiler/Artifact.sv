@@ -3,8 +3,8 @@ grammar compiler;
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
 import edu:umn:cs:melt:ableC:drivers:parseAndPrint;
 
-import edu:umn:cs:melt:exts:ableC:tables;
-import bogus_table;
+--import edu:umn:cs:melt:exts:ableC:tables;
+--import bogus_table;
 
 {-
 -- The initial specification, just listing the grammars.
@@ -92,19 +92,19 @@ parser extendedParser :: cst:Root {
 }-}
 
 {- Current capabilities of what we can generate -}
-disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t
-{ pluck edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t; }
+{-disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t
+{ pluck edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t; }-}
 
 prefix separator ":"; -- TODO: Move to ableC source
 
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;
 
-  edu:umn:cs:melt:exts:ableC:tables prefix bogus_table:TableKwd_t with "BT";
+  edu:umn:cs:melt:exts:ableC:tables prefix with "BT";
+  bogus_table prefix with "CT";
 
-  bogus_table prefix edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t with "CT";
+  prefer edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t over bogus_table:TableKwd_t;
 }
-
 
 {-
 -- This is the first working specification; Lucas wrote this one.
