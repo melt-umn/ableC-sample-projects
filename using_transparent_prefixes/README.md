@@ -97,5 +97,5 @@ See Silver issue #85,
 https://github.com/melt-umn/silver/issues/85.
 
 Specifying a prefix separator in a parser spec doesn't override the
-one specified in the host language.  Instead is clashes with it.
+one specified in the host language.  Instead it clashes with it.
 
