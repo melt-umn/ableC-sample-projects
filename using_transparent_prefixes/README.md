@@ -1,20 +1,21 @@
 # Using transparent prefixes
 
-This sample project demonstrate how to use transparent prefixes to fix
+This sample project demonstrates how to use transparent prefixes to fix
 any lexical ambiguities that arise when composing
 independently-developed language extensions that have passed the
 modular determinism analysis.  Any lexical ambiguities that arise when
 these grammars are composed will involve a marking token from at least
 one of the extensions.
 
-In the example here we compose two extensions
+In the examples here we compose two extensions
 `edu:umn:cs:melt:exts:ableC:tables` (found in the extensions that are
 part of `ableC`) and `bogus_table` found in this repository.
 
-Both introduce a marking token with the regular expression `table`,
-and thus create a lexical ambiguity.
+Both introduce a marking token with the regular expression `table`
+(that occur in the same parsing context), and thus create a lexical 
+ambiguity.
 
-The directory `simple` demonstrates the simplest and most
+The directory `compiler` demonstrates the simplest and most
 straightforward way to specify transparent prefixes to resolve the
 ambiguity.  We expect this approach to work in nearly all situations.
 
@@ -29,7 +30,7 @@ following two lines from the specification:
 These make use of the default prefix separator of "::" defined in the
 host language.  (The separator syntax of `::` is chosen since it is
 the same as the C++ scope operator and thus perhaps more familiar to
-the end users.) With these specifications, writing `CT::table` in a
+end users.)  With these specifications, writing `CT::table` in a
 program will scan as the marking token from the first extension
 listed, and `BT::table` will scan as the marking token for the second.
 
@@ -44,7 +45,7 @@ the first grammar.  It is preferred over the second one,
 
 ## Running the examples
 
-To uses each of these, one muse
+To uses each of these, change into the directory and then
 1. build the `ableC` compiler
 ```
   % ./build.sh --clean
@@ -83,7 +84,7 @@ langauge is not used.
 #### `alternate_explicit`
 
 This example explicitly specifies the transparent prefix terminals and
-the disambiugation function that are generated in the `simple`
+the disambiugation function that are generated in the simple `compiler`
 example.
 
 #### `alternate_separator`
