@@ -45,28 +45,29 @@ the first grammar.  It is preferred over the second one,
 
 ## Running the examples
 
-To uses each of these, change into the directory and then
+To use each of these, change into the directory and then
+
 1. build the `ableC` compiler
-```
+   ```
   % ./build.sh --clean
-```
+   ```
 
 2. use it on the sample program
-```
+   ```
   % java -jar ableC.jar demo.xc
-```
+   ```
 
-3. compiler the resulting C program
-```
+3. compile the resulting C program
+   ```
    % gcc demo.pp_out.c
-```
+   ```
 
 4. run the program
-```
+   ```
    % ./a.out
    6
    Correct.
-```
+   ```
 
 ## Alternate compiler specifications
 
