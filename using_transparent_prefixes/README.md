@@ -14,7 +14,7 @@ part of `ableC`) and `bogus_table` found in this repository.
 Both introduce a marking token with the regular expression `table`,
 and thus create a lexical ambiguity.
 
-The directory `simple` demonstrates the simplest and most
+The directory `compiler` demonstrates the simplest and most
 straightforward way to specify transparent prefixes to resolve the
 ambiguity.  We expect this approach to work in nearly all situations.
 
@@ -83,7 +83,7 @@ langauge is not used.
 #### `alternate_explicit`
 
 This example explicitly specifies the transparent prefix terminals and
-the disambiugation function that are generated in the `simple`
+the disambiugation function that are generated in the `compiler`
 example.
 
 #### `alternate_separator`

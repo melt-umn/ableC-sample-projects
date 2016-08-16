@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # turn on option to exit on non-zero return code.
-set -e
+set -e -v
 
-cd simple
+cd compiler
 ./build.sh --clean
 java -jar ableC.jar demo.xc
 gcc demo.pp_out.c
@@ -21,5 +21,5 @@ java -jar ableC.jar demo.xc
 gcc demo.pp_out.c
 ./a.out
 
-
+set +v
 
