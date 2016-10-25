@@ -4,8 +4,8 @@
 #include "serialize.h"
 #include "livestock.h"
 
-enum Animal_t {CHICKEN_T=1, GOAT_T};
-enum Treat_t {KALE_T=1, MEALWORMS_T};
+enum {CHICKEN_T=1, GOAT_T};
+enum {KALE_T=1, MEALWORMS_T};
 
 /** @return length needed to serialize an animal */
 size_t serialize_len(Animal *a);
@@ -18,10 +18,9 @@ char *serialize_treat(char *dest, Treat *t);
 /* TODO: strnlen() doesn't exist in ableC because _GNU_SOURCE not defined? */
 size_t strnlen(const char *s, size_t maxlen);
 
-char *serialize_animal(Animal *a, size_t *len)
+char *serialize_animal(Animal *a)
 {
-    size_t ret_len = serialize_len(a);
-    char *ret = malloc(ret_len);
+    char *ret = malloc(serialize_len(a));
     char *ret_end_ptr = ret;
 
     match (a) {
@@ -43,11 +42,86 @@ char *serialize_animal(Animal *a, size_t *len)
 
     ret_end_ptr[0] = '\0';
 
-    if (len != NULL) {
-        *len = ret_len;
+    return ret;
+}
+
+Animal *deserialize_animal(const unsigned char *serialized_animal)
+{
+    const unsigned char *end_ptr = serialized_animal;
+    if (end_ptr == NULL || *end_ptr == '\0')
+        return NULL;
+    unsigned char ty = *end_ptr++; 
+
+    Animal *a = NULL;
+
+    if (ty == CHICKEN_T) {
+        if (*end_ptr == '\0')
+            return NULL;
+
+        /* strncpy the name while advancing end_ptr */
+        size_t nm_size = *end_ptr++ - 1;
+        char *nm = malloc(nm_size + 1);
+        unsigned int i=0;
+        while (i < nm_size && *end_ptr) {
+            nm[i++] = *end_ptr++;
+        }
+        nm[i] = '\0';
+
+        if (*end_ptr == '\0')
+            return NULL;
+
+        unsigned char treat_ty = *end_ptr++; 
+        Treat *treat = NULL;
+        if (treat_ty == KALE_T) {
+            treat = Kale();
+        } else if (treat_ty == MEALWORMS_T) {
+            treat = Mealworms();
+        } else {
+            return NULL;
+        }
+
+        if (*end_ptr == '\0')
+            return NULL;
+        int eggs = *end_ptr++ - 1;
+
+//        printf("Chicken: [%s], [%d], [%d]\n", nm, treat_ty, eggs);
+        a = Chicken((const char *) nm, treat, eggs);
+    } else if (ty == GOAT_T) {
+        if (*end_ptr == '\0')
+            return NULL;
+
+        /* TODO: don't duplicate this */
+        /* strncpy the name while advancing end_ptr */
+        size_t nm_size = *end_ptr++ - 1;
+        char *nm = malloc(nm_size + 1);
+        unsigned int i=0;
+        while (i < nm_size && *end_ptr) {
+            nm[i++] = *end_ptr++;
+        }
+        nm[i] = '\0';
+
+        if (*end_ptr == '\0')
+            return NULL;
+
+        size_t bday_size = *end_ptr++ - 1;
+        char *bday = malloc(bday_size + 1);
+        i=0;
+        while (i < bday_size && *end_ptr) {
+            bday[i++] = *end_ptr++;
+        }
+        bday[i] = '\0';
+
+        if (*end_ptr == '\0')
+            return NULL;
+        int gallons = *end_ptr++ - 1;
+
+//        printf("Goat: [%s], [%s], [%d]\n", nm, bday, gallons);
+        a = Goat((const char *) nm, (const char *) bday, gallons);
+    } else {
+        return NULL;
     }
 
-    return ret;
+    return a;
 }
 
 size_t serialize_len(Animal *a)

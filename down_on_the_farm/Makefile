@@ -26,6 +26,15 @@ serialize.o:	serialize.c
 populate_table:	populate_table.o serialize.o
 	gcc -lsqlite3 populate_table.o serialize.o livestock.o
 
+accounting2.c:	accounting2.xc compiler/ableC.jar
+	java -jar compiler/ableC.jar accounting2.xc
+
+accounting.o:	accounting.c
+	gcc -c accounting.c
+
+accounting2:	accounting2.o serialize.o
+	gcc -lsqlite3 accounting2.o serialize.o livestock.o
+
 a.out:	accounting.o livestock.o
 	gcc accounting.o livestock.o
 

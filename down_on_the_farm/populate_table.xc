@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -24,8 +23,7 @@ int main() {
 
     unsigned int i;
     for (i=0; i < sizeof(farm) / sizeof(Animal *); ++i) {
-        size_t len = 0;
-        char *s_animal = serialize_animal(farm[i], &len);
+        char *s_animal = serialize_animal(farm[i]);
 
         on farm_db commit {
             INSERT INTO farm VALUES (
