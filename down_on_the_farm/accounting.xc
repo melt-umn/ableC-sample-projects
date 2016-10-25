@@ -55,10 +55,9 @@ int main() {
     }
 
 
-
+    // free allocated datatype values
     for (int i=0; i<7; ++i) {
-        Animal *a = farm[i];
-        freeA(a);
+        freeA(farm[i]);
     }
     
 }
