@@ -1,4 +1,5 @@
-
+#ifndef __LIVESTOCK_H
+#define __LIVESTOCK_H
 
 typedef datatype Treat  Treat;
 datatype Treat { Kale(); Mealworms(); };
@@ -12,3 +13,6 @@ datatype Animal {
 
 
 void freeA(Animal *);
+
+#endif
+

@@ -17,6 +17,8 @@ parser extendedParser :: cst:Root {
   edu:umn:cs:melt:exts:ableC:algDataTypes;
 
   edu:umn:cs:melt:exts:ableC:tables;
+
+  edu:umn:cs:melt:exts:ableC:sqlite;
  
 }
 

@@ -11,6 +11,21 @@ livestock.c:	livestock.xc livestock.h compiler/ableC.jar
 livestock.o:	livestock.c
 	gcc -c livestock.c
 
+populate_table.c:	populate_table.xc compiler/ableC.jar
+	java -jar compiler/ableC.jar populate_table.xc
+
+populate_table.o:	populate_table.c
+	gcc -c populate_table.c
+
+serialize.c:	serialize.xc serialize.h compiler/ableC.jar
+	java -jar compiler/ableC.jar serialize.xc
+
+serialize.o:	serialize.c
+	gcc -c serialize.c
+
+populate_table:	populate_table.o serialize.o
+	gcc -lsqlite3 populate_table.o serialize.o livestock.o
+
 a.out:	accounting.o livestock.o
 	gcc accounting.o livestock.o
 
