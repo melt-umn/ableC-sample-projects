@@ -55,4 +55,10 @@ int main() {
     }
 
 
+
+    for (int i=0; i<7; ++i) {
+        Animal *a = farm[i];
+        freeA(a);
+    }
+    
 }
