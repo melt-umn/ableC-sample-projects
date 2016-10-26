@@ -6,21 +6,28 @@
 #include "serialize.h"
 #include "sqlite.xh"
 
-Animal **extract_farm_from_db(size_t *found_num_animals);
-
 int main() {
     printf("Accounting for \"Contrived Examples\" farm\n");
-
-    size_t num_animals = 0;
-    Animal **farm = extract_farm_from_db(&num_animals);
 
     float expenses = 0.0;
     float income = 0.0;
 
     int mood = 1;
 
-    for (int i=0; i<num_animals; ++i) {
-        Animal *a = farm[i];
+    use "farm.db" with {
+        table farm (serialized_animal VARCHAR)
+    } as farm_db;
+
+    on farm_db query {
+        SELECT * FROM farm
+    } as animal_rows;
+
+    foreach (animal_row : animal_rows) {
+        Animal *a = deserialize_animal(animal_row.serialized_animal);
+        if (a == NULL) {
+            continue;
+        }
+
         match (a) {
             Chicken("Stella", _, _) -> {
                 expenses = expenses + 10.00;  // amortized vet costs
@@ -36,9 +43,9 @@ int main() {
 
             Goat(nm, bday, gallons) -> {
                 if ( table {
-                        bday[3]=='1' && bday[4]=='0' : T F
                         // match bday against /___10_*/ : T F
                         // bday ~= /.../ : T F
+                        bday[3]=='1' && bday[4]=='0' : T F
                         gallons > 10                 : * T
                         mood                         : F T })  {
                      expenses = expenses + 5.00; // extra hay for the goats
@@ -49,52 +56,12 @@ int main() {
             }
         };
         
-    printf("Expenses = %.2f\n", expenses);
+        printf("Expenses = %.2f\n", expenses);
+
+        freeA(a);
     }
 
-
-    // free allocated datatype values
-    for (int i=0; i<num_animals; ++i) {
-        freeA(farm[i]);
-    }
-
-    free(farm);
-}
-
-Animal **extract_farm_from_db(size_t *found_num_animals)
-{
-    use "farm.db" with {
-        table farm (serialized_animal VARCHAR)
-    } as farm_db;
-
-    on farm_db query {
-        SELECT * FROM farm
-    } as animals;
-
-    /* count the animals */
-    size_t num_animals = 0;
-    foreach (a : animals) {
-        ++num_animals;
-    }
-
-    Animal **farm = malloc(num_animals * sizeof(Animal *));
-
-    /* extract the serialized representation of the animals and store in the
-        farm */
-    size_t i = 0;
-    foreach (a : animals) {
-        Animal *deser_a = deserialize_animal(a.serialized_animal);
-        if (deser_a == NULL) {
-            --num_animals;
-        } else {
-            farm[i++] = deser_a;
-        }
-    }
-
-    if (found_num_animals != NULL) {
-        *found_num_animals = num_animals;
-    }
-
-    return farm;
+    finalize(animal_rows);
+    db_exit(farm_db);
 }
 

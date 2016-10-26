@@ -1,9 +1,10 @@
+all: a.out accounting2 populate_table
 
 accounting.c:	accounting.xc compiler/ableC.jar
 	java -jar compiler/ableC.jar accounting.xc
 
 accounting.o:	accounting.c
-	gcc -c accounting.c
+	gcc -std=c99 -c accounting.c
 
 livestock.c:	livestock.xc livestock.h compiler/ableC.jar
 	java -jar compiler/ableC.jar livestock.xc
@@ -23,23 +24,23 @@ serialize.c:	serialize.xc serialize.h compiler/ableC.jar
 serialize.o:	serialize.c
 	gcc -c serialize.c
 
-populate_table:	populate_table.o serialize.o
-	gcc -lsqlite3 populate_table.o serialize.o livestock.o
+populate_table:	populate_table.o serialize.o livestock.o
+	gcc -o populate_table -lsqlite3 populate_table.o serialize.o livestock.o
 
 accounting2.c:	accounting2.xc compiler/ableC.jar
 	java -jar compiler/ableC.jar accounting2.xc
 
-accounting.o:	accounting.c
-	gcc -c accounting.c
+accounting2.o:	accounting2.c
+	gcc -std=c99 -c accounting2.c
 
-accounting2:	accounting2.o serialize.o
-	gcc -lsqlite3 accounting2.o serialize.o livestock.o
+accounting2:	accounting2.o serialize.o livestock.o
+	gcc -o accounting2 -lsqlite3 accounting2.o serialize.o livestock.o
 
 a.out:	accounting.o livestock.o
 	gcc accounting.o livestock.o
 
 clean:
-	rm -f *.c *.i *.o a.out *~
+	rm -f *.c *.i *.o a.out accounting2 populate_table *~
 
 
 # Build the ableC compiler
