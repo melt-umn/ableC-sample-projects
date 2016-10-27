@@ -25,6 +25,7 @@ int main() {
     foreach (animal_row : animal_rows) {
         Animal *a = deserialize_animal(animal_row.serialized_animal);
         if (a == NULL) {
+            fprintf(stderr, "warning: failed to deserialize animal\n");
             continue;
         }
 

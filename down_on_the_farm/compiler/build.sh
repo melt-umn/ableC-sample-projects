@@ -17,10 +17,19 @@ PATH_TO_extensions="../../../extensions"
 
 PATH_TO_tables="../../../ableC/extensions/conditional-tables"
 
+PATH_TO_closure="../../../ableC/extensions/closure"
+
+PATH_TO_gc="../../../ableC/extensions/gc"
+
+PATH_TO_string="../../../ableC/extensions/string"
+
 silver -I ../ \
        -I $PATH_TO_ableC \
        -I $PATH_TO_extensions \
        -I $PATH_TO_tables \
+       -I $PATH_TO_closure \
+       -I $PATH_TO_gc \
+       -I $PATH_TO_string \
        -o ableC.jar $@ compiler
 
 
