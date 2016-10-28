@@ -19,7 +19,20 @@ parser extendedParser :: cst:Root {
   edu:umn:cs:melt:exts:ableC:tables;
 
   edu:umn:cs:melt:exts:ableC:sqlite;
- 
+
+  edu:umn:cs:melt:exts:ableC:regex; 
+
+  -- Transparent prefixes
+  edu:umn:cs:melt:exts:ableC:algDataTypes prefix with "A";
+  edu:umn:cs:melt:exts:ableC:regex prefix with "B";
+
+  -- Indicate that 'match' is to be scanned as the terminal from the
+  -- `algDataTypes` grammar.  It is preferred over the one from the
+  -- `regex` grammar.
+  prefer
+   edu:umn:cs:melt:exts:ableC:algDataTypes:src:patternmatching:concretesyntax:matchKeyword:Match_t
+  over
+   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
 }
 
 

@@ -1,30 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 #include "livestock.h"
+#include "serialize.h"
+#include "sqlite.xh"
 
 int main() {
     printf("Accounting for \"Contrived Examples\" farm\n");
-   
-    Animal *stella = Chicken("Stella", Kale(), 0);
-    Animal *ray = Chicken("Ray", Mealworms(), 5);
-    Animal *winnie = Chicken("Winnie", Kale(), 2);
-    Animal *chirpy = Chicken("Chirpy", Mealworms(), 4);
-
-    Animal *edsger = Goat("Edsger", "24/04/2014", 15);
-    Animal *henk = Goat("Henk", "21/10/2013", 12);
-    Animal *luitzen = Goat ("Luitzen", "11/11/2011", 11);
-            
-    Animal *farm[7] = {stella, ray, winnie, chirpy, edsger, henk, luitzen};
 
     float expenses = 0.0;
     float income = 0.0;
 
     int mood = 1;
-    
-    for (int i=0; i<7; ++i) {
-        Animal *a = farm[i];
+
+    use "farm.db" with {
+        table farm (serialized_animal VARCHAR)
+    } as farm_db;
+
+    on farm_db query {
+        SELECT * FROM farm
+    } as animal_rows;
+
+    foreach (animal_row : animal_rows) {
+        Animal *a = deserialize_animal(animal_row.serialized_animal);
+        if (a == NULL) {
+            continue;
+        }
+
         match (a) {
             Chicken("Stella", _, _) -> {
                 expenses = expenses + 10.00;  // amortized vet costs
@@ -40,9 +44,10 @@ int main() {
 
             Goat(nm, bday, gallons) -> {
                 if ( table {
-                        bday[3]=='1' && bday[4]=='0' : T F
-                        // match bday against /___10_*/ : T F
-                        // bday ~= /.../ : T F
+                        // 
+                        //bday[3]=='1' && bday[4]=='0' : T F
+                        // bday =~ /.../ : T F
+                        B::match bday against /___10_*/ : T F
                         gallons > 10                 : * T
                         mood                         : F T })  {
                      expenses = expenses + 5.00; // extra hay for the goats
@@ -53,13 +58,12 @@ int main() {
             }
         };
         
-    printf("Expenses = %.2f\n", expenses);
+        printf("Expenses = %.2f\n", expenses);
+
+        freeA(a);
     }
 
-
-    // free allocated datatype values
-    for (int i=0; i<7; ++i) {
-        freeA(farm[i]);
-    }
-    
+    finalize(animal_rows);
+    db_exit(farm_db);
 }
+

@@ -1,10 +1,4 @@
-all: a.out accounting2 populate_table
-
-accounting.c:	accounting.xc compiler/ableC.jar
-	java -jar compiler/ableC.jar accounting.xc
-
-accounting.o:	accounting.c
-	gcc -std=c99 -c accounting.c
+all: a.out accounting populate_table
 
 livestock.c:	livestock.xc livestock.h compiler/ableC.jar
 	java -jar compiler/ableC.jar livestock.xc
@@ -24,17 +18,30 @@ serialize.c:	serialize.xc serialize.h compiler/ableC.jar
 serialize.o:	serialize.c
 	gcc -c serialize.c
 
-populate_table:	populate_table.o serialize.o livestock.o
+populate_table_lib:	populate_table.o serialize.o livestock.o
 	gcc -o populate_table -lsqlite3 populate_table.o serialize.o livestock.o
 
-accounting2.c:	accounting2.xc compiler/ableC.jar
-	java -jar compiler/ableC.jar accounting2.xc
+populate_table:	populate_table.o serialize.o livestock.o sqlite/sqlite3.o
+	gcc -o populate_table sqlite/sqlite3.o populate_table.o serialize.o livestock.o  -lpthread -ldl
 
-accounting2.o:	accounting2.c
-	gcc -std=c99 -c accounting2.c
+#accounting.c:	accounting.xc compiler/ableC.jar
+#	java -jar compiler/ableC.jar accounting.xc
 
-accounting2:	accounting2.o serialize.o livestock.o
-	gcc -o accounting2 -lsqlite3 accounting2.o serialize.o livestock.o
+#accounting.o:	accounting.c
+#	gcc -std=c99 -c accounting.c
+
+accounting.c:	accounting.xc compiler/ableC.jar
+	java -jar compiler/ableC.jar accounting.xc
+
+accounting.o:	accounting.c
+	gcc -c accounting.c
+
+# the library version
+#accountinglib:	accounting.o serialize.o livestock.o
+#	gcc -o accounting -lsqlite3 accounting.o serialize.o livestock.o
+
+accounting:	accounting.o serialize.o livestock.o sqlite/sqlite3.o
+	gcc -o accounting sqlite/sqlite3.o accounting.o serialize.o livestock.o -lpthread -ldl
 
 a.out:	accounting.o livestock.o
 	gcc accounting.o livestock.o

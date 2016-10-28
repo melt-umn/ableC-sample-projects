@@ -17,10 +17,13 @@ PATH_TO_extensions="../../../extensions"
 
 PATH_TO_tables="../../../ableC/extensions/conditional-tables"
 
+PATH_TO_regex="../../../ableC/extensions/regex"
+
 silver -I ../ \
        -I $PATH_TO_ableC \
        -I $PATH_TO_extensions \
        -I $PATH_TO_tables \
+       -I $PATH_TO_regex \
        -o ableC.jar $@ compiler
 
 
