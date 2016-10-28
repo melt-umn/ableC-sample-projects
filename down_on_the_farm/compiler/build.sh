@@ -18,6 +18,11 @@ PATH_TO_extensions="../../../extensions"
 PATH_TO_tables="../../../ableC/extensions/conditional-tables"
 
 PATH_TO_regex="../../../ableC/extensions/regex"
+PATH_TO_closure="../../../ableC/extensions/closure"
+
+#PATH_TO_gc="../../../ableC/extensions/gc"
+
+#PATH_TO_string="../../../ableC/extensions/string"
 
 silver -I ../ \
        -I $PATH_TO_ableC \
@@ -26,6 +31,9 @@ silver -I ../ \
        -I $PATH_TO_regex \
        -o ableC.jar $@ compiler
 
+#       -I $PATH_TO_closure \
+#       -I $PATH_TO_gc \
+#       -I $PATH_TO_string \
 
 
 rm -f build.xml

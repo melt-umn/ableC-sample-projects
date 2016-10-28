@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <regex.h>
 
 #include "livestock.h"
 #include "serialize.h"
@@ -10,8 +9,8 @@
 int main() {
     printf("Accounting for \"Contrived Examples\" farm\n");
 
-    float total_expenses = 0.0;
-    float total_income = 0.0;
+    float expenses = 0.0;
+    float income = 0.0;
 
     int mood = 1;
 
@@ -26,21 +25,10 @@ int main() {
     foreach (animal_row : animal_rows) {
         Animal *a = deserialize_animal(animal_row.serialized_animal);
         if (a == NULL) {
+            fprintf(stderr, "warning: failed to deserialize animal\n");
             continue;
         }
 
-        float expenses = 0.0;
-        float income = 0.0;
-
-        match (a) {
-            Chicken(nm, _, _) -> {
-                printf("Chicken: %s\n", nm);
-            }
-            Goat(nm, bday, _) -> {
-                printf("Goat: %s, birthady %s\n", nm, bday);
-            }
-        };
-            
         match (a) {
             Chicken("Stella", _, _) -> {
                 expenses = expenses + 10.00;  // amortized vet costs
@@ -56,10 +44,9 @@ int main() {
 
             Goat(nm, bday, gallons) -> {
                 if ( table {
-                        // 
-                        //bday[3]=='1' && bday[4]=='0' : T F
-                        // bday =~ /.../ : T F
-                        B::match bday against /___10_*/ : T F
+                        // match bday against /___10_*/ : T F
+                        // bday ~= /.../ : T F
+                        bday[3]=='1' && bday[4]=='0' : T F
                         gallons > 10                 : * T
                         mood                         : F T })  {
                      expenses = expenses + 5.00; // extra hay for the goats
@@ -70,17 +57,10 @@ int main() {
             }
         };
         
-        printf("   expenses = %.2f\n", expenses);
-        printf("   income   = %.2f\n", income);
+        printf("Expenses = %.2f\n", expenses);
 
-        total_expenses += expenses;
-        total_income += income;
         freeA(a);
     }
-
-    printf ("\nTotals:\n");
-    printf("   expenses = %.2f\n", total_expenses);
-    printf("   income   = %.2f\n", total_income);
 
     finalize(animal_rows);
     db_exit(farm_db);
