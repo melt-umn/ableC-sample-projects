@@ -18,27 +18,14 @@ serialize.c:	serialize.xc serialize.h compiler/ableC.jar
 serialize.o:	serialize.c
 	gcc -c serialize.c
 
-populate_table_lib:	populate_table.o serialize.o livestock.o
-	gcc -o populate_table -lsqlite3 populate_table.o serialize.o livestock.o
-
 populate_table:	populate_table.o serialize.o livestock.o sqlite/sqlite3.o
 	gcc -o populate_table sqlite/sqlite3.o populate_table.o serialize.o livestock.o  -lpthread -ldl
-
-#accounting.c:	accounting.xc compiler/ableC.jar
-#	java -jar compiler/ableC.jar accounting.xc
-
-#accounting.o:	accounting.c
-#	gcc -std=c99 -c accounting.c
 
 accounting.c:	accounting.xc compiler/ableC.jar
 	java -jar compiler/ableC.jar accounting.xc
 
 accounting.o:	accounting.c
 	gcc -c accounting.c
-
-# the library version
-#accountinglib:	accounting.o serialize.o livestock.o
-#	gcc -o accounting -lsqlite3 accounting.o serialize.o livestock.o
 
 accounting:	accounting.o serialize.o livestock.o sqlite/sqlite3.o
 	gcc -o accounting sqlite/sqlite3.o accounting.o serialize.o livestock.o -lpthread -ldl
@@ -57,3 +44,30 @@ compiler/ableC.jar:
 # Remove the generated compile so that it will be re-built.
 cleanjar:
 	rm -f compiler/ableC.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+#populate_table_lib:	populate_table.o serialize.o livestock.o
+#	gcc -o populate_table -lsqlite3 populate_table.o serialize.o livestock.o
+
+
+# the library version
+#accountinglib:	accounting.o serialize.o livestock.o
+#	gcc -o accounting -lsqlite3 accounting.o serialize.o livestock.o
+
+#accounting.c:	accounting.xc compiler/ableC.jar
+#	java -jar compiler/ableC.jar accounting.xc
+
+#accounting.o:	accounting.c
+#	gcc -std=c99 -c accounting.c
+
