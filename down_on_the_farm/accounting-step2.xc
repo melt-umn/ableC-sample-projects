@@ -56,9 +56,9 @@ int main() {
 
             Goat(nm, bday, gallons) -> {
                 if ( table {
-                        B::match bday against /___10_*/ : T F
-                        gallons > 10                    : * T
-                        mood                            : F T })  {
+                        bday[3]=='1' && bday[4]=='0' : T F
+                        gallons > 10                 : * T
+                        mood                         : F T })  {
                      expenses = expenses + 5.00; // extra hay for the goats
                 }
                 
