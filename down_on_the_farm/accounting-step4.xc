@@ -56,8 +56,8 @@ int main() {
 
             Goat(nm, bday, gallons) -> {
                 if ( table {
-		        // The use of a transparent prefix 'B'
-                        B::match bday against /___10_*/ : T F
+		        // The use of a transparent prefix 'RX'
+                        RX::match bday against /___10_*/ : T F
                         gallons > 10                    : * T
                         mood                            : F T })  {
                      expenses = expenses + 5.00; // extra hay for the goats

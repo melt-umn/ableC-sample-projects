@@ -34,7 +34,7 @@ a.out:	accounting.o livestock.o
 	gcc accounting.o livestock.o
 
 clean:
-	rm -f *.c *.i *.o a.out accounting2 populate_table *~
+	rm -f *.c *.i *.o a.out accounting populate_table *~
 
 
 # Build the ableC compiler

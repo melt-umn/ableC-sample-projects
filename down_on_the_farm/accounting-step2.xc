@@ -55,10 +55,9 @@ int main() {
             }
 
             Goat(nm, bday, gallons) -> {
-                if ( table {
-                        bday[3]=='1' && bday[4]=='0' : T F
-                        gallons > 10                 : * T
-                        mood                         : F T })  {
+                if ( (bday[3]=='1' && bday[4]=='0' && ! mood) ||
+                     (! (bday[3]=='1' && bday[4]=='0') &&
+                      gallons > 10 && mood) ) {
                      expenses = expenses + 5.00; // extra hay for the goats
                 }
                 

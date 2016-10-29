@@ -16,15 +16,15 @@ parser extendedParser :: cst:Root {
 
   edu:umn:cs:melt:exts:ableC:algDataTypes;
 
-  edu:umn:cs:melt:exts:ableC:tables;
-
   edu:umn:cs:melt:exts:ableC:sqlite;
+
+  edu:umn:cs:melt:exts:ableC:tables;
 
   edu:umn:cs:melt:exts:ableC:regex; 
 
   -- Transparent prefixes
-  edu:umn:cs:melt:exts:ableC:algDataTypes prefix with "A";
-  edu:umn:cs:melt:exts:ableC:regex prefix with "B";
+  edu:umn:cs:melt:exts:ableC:algDataTypes prefix with "ADT";
+  edu:umn:cs:melt:exts:ableC:regex prefix with "RX";
 
   -- Indicate that 'match' is to be scanned as the terminal from the
   -- `algDataTypes` grammar.  It is preferred over the one from the
