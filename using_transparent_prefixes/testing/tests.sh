@@ -3,6 +3,8 @@
 # turn on option to exit on non-zero return code.
 set -e -v
 
+cd ..
+
 cd compiler
 ./build.sh --clean
 java -jar ableC.jar demo.xc
