@@ -72,7 +72,7 @@ stage ("Checkout") {
 stage ("Test") {
   node {
     withEnv(["PATH=${SILVER_BASE}/support/bin/:${env.PATH}"]) {
-      sh "cd ableC_sample_projects/testing/determinism && ./run_tests.sh"
+      sh "cd ableC_sample_projects/using_transparent_prefixes/testing/ && ./run_tests.sh"
     }
   }
 }
