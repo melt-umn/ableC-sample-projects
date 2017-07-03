@@ -21,6 +21,12 @@ ableC.jar: $(GRAMMAR_SOURCES)
 pts0.c:	pts0.xc ableC.jar
 	java -jar ableC.jar pts0.xc -I/usr/local/include/cilk
 
+pts0.out:	pts0.c
+	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \
+		pts0.c -o pts0.out \
+		-L/usr/local/lib -L/usr/local/lib/cilk -lcilkrt0 -lcilk \
+		-Wl,-rpath,/usr/local/lib -pthread -lm
+
 ts0.c:	ts0.xc ableC.jar
 	java -jar ableC.jar ts0.xc -I/usr/local/include/cilk
 

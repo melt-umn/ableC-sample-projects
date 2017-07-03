@@ -16,6 +16,9 @@ datatype Tree {
     Leaf (const char*);
 };
 
+cilk int count_matches (Tree *t) ;
+// this prototype also seems to be required - that is unfortunate, but OK for now
+
 
 cilk int count_matches (Tree *t) {
     int foo = 9;
@@ -32,6 +35,7 @@ cilk int count_matches (Tree *t) {
     Leaf(_) -> { cilk return 1 ; }
     _ -> { cilk return 0 ; }
   } ;
+    
 }
 
 
