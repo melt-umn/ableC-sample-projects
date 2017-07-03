@@ -17,8 +17,15 @@ ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
 	silver -o $@ $(SVFLAGS) artifact
 
-pts0.c:	pts0.xc
 
+pts0.c:	pts0.xc ableC.jar
+	java -jar ableC.jar pts0.xc -I/usr/local/include/cilk
+
+ts0.c:	ts0.xc ableC.jar
+	java -jar ableC.jar ts0.xc -I/usr/local/include/cilk
+
+ts0.out:	ts0.c
+	gcc ts0.c -o ts0.out
 
 
 

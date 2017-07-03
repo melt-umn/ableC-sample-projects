@@ -1,3 +1,6 @@
 *~
 ableC.jar
 build.xml
+*.c
+*.out
+*.i
