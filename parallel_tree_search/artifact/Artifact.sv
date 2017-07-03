@@ -1,4 +1,4 @@
-grammar compiler;
+grammar artifact;
 
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
 import edu:umn:cs:melt:ableC:drivers:compile;
@@ -8,16 +8,19 @@ parser extendedParser :: cst:Root {
 
   edu:umn:cs:melt:exts:ableC:algebraicDataTypes prefix with "ADT";
 
-  edu:umn:cs:melt:exts:ableC:regex prefix with "RX"; 
+  --edu:umn:cs:melt:exts:ableC:regex prefix with "RX"; 
 
   edu:umn:cs:melt:exts:ableC:cilk;
 
+{-
   prefer
    edu:umn:cs:melt:exts:ableC:algebraicDataTypes:src:patternmatching:concretesyntax:matchKeyword:Match_t
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatching:RegexMatch_t;
 --   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
-  
+ -}
+
+
 }
 
 
