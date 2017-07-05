@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <regex.h>
 
-#include <cilk.h>
-#include <cilk-cilk2c-pre.h>
+//#include <cilk.h>
+//#include <cilk-cilk2c-pre.h>
 
 typedef  datatype Tree  Tree;
 
@@ -16,15 +16,15 @@ datatype Tree {
 };
 
 
-cilk
+// cilk
 int count_matches (Tree *t) {
     int foo = 0;
     match ( (Tree *) t) {
         Fork(t1,t2,str)-> { 
             int res_t1, res_t2;
-             spawn
+            // spawn
 	    res_t1 = count_matches(t1);
-             spawn
+            // spawn
 	    res_t2 = count_matches(t2);
 
             int res_str = 0;
@@ -33,22 +33,22 @@ int count_matches (Tree *t) {
             else 
                 res_str = 0;
 
-             sync;
-             cilk
+            // sync;
+            // cilk
 	    return res_t1 + res_t2 + res_str ; 
     }
 
     Leaf( /l/ ) -> {
-         cilk
+        // cilk
 	    return 1 ; }
     _ -> {
-         cilk
+        // cilk
 	  return 0 ; }
   } ;
 }
 
 
-cilk
+//cilk
 int main (int argv, char **argc) {
     Tree *tree ;
     tree =
@@ -65,11 +65,11 @@ int main (int argv, char **argc) {
     // read in a tree
 
     int result = 0;
-    spawn
+    //spawn
     result = count_matches(tree);
     printf ("Number of matches = %d\n", result);
 
-     cilk 
+    // cilk 
     return 0;
 }
 

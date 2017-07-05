@@ -9,6 +9,8 @@
 #include <cilk.h>
 #include <cilk-cilk2c-pre.h>
 
+#include <regex.h>
+
 typedef  datatype Tree  Tree;
 
 datatype Tree {
@@ -19,20 +21,26 @@ datatype Tree {
 cilk int count_matches (Tree *t) ;
 // this prototype also seems to be required - that is unfortunate, but OK for now
 
-
-cilk int count_matches (Tree *t) {
+cilk int count_matches (Tree *t0) {
     int foo = 9;
-    match ( (Tree *) t) {
+    Tree *t = t0;
+    // matching on t0 without cast fails - with ADT decl not found...
+    match ( t ) {
         Fork(t1,t2,str)-> { 
-            int res_t1, res_t2;
+            int res_t1, res_t2, res_str;
             spawn res_t1 = count_matches(t1);
             spawn res_t2 = count_matches(t2);
-            int res_str = foo;
+
+            if ( str =~ /foo[1-9]+/ )
+                res_str = 1 ;
+            else 
+                res_str = 0;
+
             sync;
             cilk return res_t1 + res_t2 + res_str ; 
     }
 
-    Leaf(_) -> { cilk return 1 ; }
+    Leaf( /l/ ) -> { cilk return 1 ; }
     _ -> { cilk return 0 ; }
   } ;
     

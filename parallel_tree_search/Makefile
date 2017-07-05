@@ -3,7 +3,7 @@ ABLEC_BASE?=../../ableC
 EXTS_BASE?=../../extensions
 
 # All directories containing grammars that may be included
-GRAMMAR_DIRS=$(ABLEC_BASE) $(wildcard $(EXTS_BASE)/*/grammars)
+GRAMMAR_DIRS=$(ABLEC_BASE) $(wildcard $(EXTS_BASE)/*/grammars) artifact
 
 # All silver files in included grammars, to be included as dependancies
 GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
@@ -15,7 +15,18 @@ all: ableC.jar examples
 
 ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
-	silver -o $@ $(SVFLAGS) artifact
+	silver --clean -o $@ $(SVFLAGS) artifact
+
+
+pts.c:	pts.xc ableC.jar
+	java -jar ableC.jar pts.xc -I/usr/local/include/cilk
+
+pts.out:	pts.c
+	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \
+		pts.c -o pts.out \
+		-L/usr/local/lib -L/usr/local/lib/cilk -lcilkrt0 -lcilk \
+		-Wl,-rpath,/usr/local/lib -pthread -lm
+
 
 
 pts0.c:	pts0.xc ableC.jar
@@ -32,6 +43,13 @@ ts0.c:	ts0.xc ableC.jar
 
 ts0.out:	ts0.c
 	gcc ts0.c -o ts0.out
+
+
+rts0.c:	rts0.xc ableC.jar
+	java -jar ableC.jar rts0.xc 
+
+rts0.out:	rts0.c
+	gcc rts0.c -o rts0.out
 
 
 
