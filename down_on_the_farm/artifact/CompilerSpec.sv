@@ -1,4 +1,4 @@
-grammar compiler;
+grammar artifact;
 
 {- This specification composes two grammars that lead to a lexical
    ambiguity.  There are few ways to resolve this, ranging from the
@@ -14,25 +14,26 @@ import edu:umn:cs:melt:ableC:drivers:compile;
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;
 
-  edu:umn:cs:melt:exts:ableC:algDataTypes;
+  edu:umn:cs:melt:exts:ableC:algebraicDataTypes;
 
   edu:umn:cs:melt:exts:ableC:sqlite;
 
   edu:umn:cs:melt:exts:ableC:tables;
-
+{- Not needed for the first few steps - 
   edu:umn:cs:melt:exts:ableC:regex; 
 
   -- Transparent prefixes
-  edu:umn:cs:melt:exts:ableC:algDataTypes prefix with "ADT";
+  edu:umn:cs:melt:exts:ableC:algebraicDataTypes prefix with "ADT";
   edu:umn:cs:melt:exts:ableC:regex prefix with "RX";
 
   -- Indicate that 'match' is to be scanned as the terminal from the
   -- `algDataTypes` grammar.  It is preferred over the one from the
   -- `regex` grammar.
   prefer
-   edu:umn:cs:melt:exts:ableC:algDataTypes:src:patternmatching:concretesyntax:matchKeyword:Match_t
+   edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:matchKeyword:Match_t
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
+-}
 }
 
 
