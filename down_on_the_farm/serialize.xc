@@ -160,10 +160,10 @@ char *serialize_treat(char *dest, Treat *t)
 {
     match (t) {
         Kale() -> {
-            dest[0] = KALE_T;
+            dest[0] = (char) KALE_T;
         }
         Mealworms() -> {
-            dest[0] = MEALWORMS_T;
+            dest[0] = (char) MEALWORMS_T;
         }
     };
 
