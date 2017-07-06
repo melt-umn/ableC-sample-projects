@@ -37,7 +37,7 @@ int main() {
                 printf("Chicken: %s\n", nm);
             }
             Goat(nm, bday, _) -> {
-                printf("Goat: %s, birthady %s\n", nm, bday);
+                printf("Goat: %s, birthday %s\n", nm, bday);
             }
         };
             
