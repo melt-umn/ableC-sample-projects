@@ -19,7 +19,7 @@ parser extendedParser :: cst:Root {
   edu:umn:cs:melt:exts:ableC:sqlite;
 
   edu:umn:cs:melt:exts:ableC:tables;
-{- Not needed for the first few steps - 
+--  Not needed for the first few steps - 
   edu:umn:cs:melt:exts:ableC:regex; 
 
   -- Transparent prefixes
@@ -33,7 +33,7 @@ parser extendedParser :: cst:Root {
    edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:matchKeyword:Match_t
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
--}
+-- 
 }
 
 

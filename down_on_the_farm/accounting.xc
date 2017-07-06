@@ -55,6 +55,13 @@ int main() {
             }
 
             Goat(nm, bday, gallons) -> {
+                if ( table {
+                        bday =~ /___10_*/ : T F
+                        gallons > 10      : * T
+                        mood              : F T })  {
+                     expenses = expenses + 5.00; // extra hay for the goats
+                }
+                
                 expenses = expenses + gallons * 1.65; // feed cost per gallon
                 income += gallons * 3.40;             // price per gallon
             }
