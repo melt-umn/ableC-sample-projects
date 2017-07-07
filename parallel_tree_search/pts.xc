@@ -59,6 +59,10 @@ cilk int count_matches (Tree *t0) {
             spawn res_t2 = count_matches(t2);
 
             if ( str =~ /[1-9]+/ )
+	       // To use the transparent prefix, use this conditional
+	       // instead of the one above.
+	       // ( RX::match str against /[1-9]+/ )
+
                 res_str = 1 ;
             else 
                 res_str = 0;
