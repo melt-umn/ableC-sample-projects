@@ -15,7 +15,7 @@ export ANT_OPTS="-Xss80M -Xmx4000M"
 
 PATH_TO_ableC="../../../ableC"
 
-PATH_TO_tables="../../../ableC/extensions/conditional-tables"
+PATH_TO_tables="../../../extensions/ableC-condition-tables/grammars"
 
 silver -I ../ \
        -I $PATH_TO_ableC \

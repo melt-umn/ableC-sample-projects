@@ -12,6 +12,11 @@ properties([
         name: 'SILVER_BASE',
         defaultValue: '/export/scratch/melt-jenkins/custom-silver/',
         description: 'Silver installation path to use. Currently assumes only one build machine. Otherwise a path is not sufficient, we need to copy artifacts or something else.'
+      ],
+      [ $class: 'StringParameterDefinition',
+        name: 'ABLEC_BASE',
+        defaultValue: "ableC",
+        description: 'AbleC installation path to use.'
       ]
     ]
   ],
@@ -66,13 +71,25 @@ stage ("Checkout") {
                  [url: 'https://github.com/melt-umn/ableC_sample_projects']
                ]
              ])
+    checkout([ $class: 'GitSCM',
+               branches: [[name: '*/develop']],
+               doGenerateSubmoduleConfigurations: false,
+               extensions: [
+                 [ $class: 'RelativeTargetDirectory',
+                   relativeTargetDir: "extensions/ableC-condition-tables"]
+               ],
+               submoduleCfg: [],
+               userRemoteConfigs: [
+                 [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
+               ]
+             ])
   }
 }
 
 stage ("Test") {
   node {
     withEnv(["PATH=${SILVER_BASE}/support/bin/:${env.PATH}"]) {
-      sh "cd ableC_sample_projects/using_transparent_prefixes/testing/ && ./run_tests.sh"
+      sh "make clean all"
     }
   }
 }
