@@ -22,7 +22,7 @@ parser extendedParser :: cst:Root {
   -- `algDataTypes` grammar.  It is preferred over the one from the
   -- `regex` grammar.
   prefer
-   edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:matchKeyword:Match_t
+   edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:Match_t
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
 }
