@@ -88,7 +88,7 @@ stage ("Checkout") {
 
 stage ("Test") {
   node {
-    withEnv(["PATH=${SILVER_BASE}/support/bin/:${env.PATH}"]) {
+    withEnv(["PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}"]) {
       sh "make clean all"
     }
   }
