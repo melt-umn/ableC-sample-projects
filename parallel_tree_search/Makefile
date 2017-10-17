@@ -19,7 +19,7 @@ ableC.jar: $(GRAMMAR_SOURCES)
 
 
 pts.c:	pts.xc ableC.jar
-	java -jar ableC.jar pts.xc -I/usr/local/include/cilk
+	java -Xss6M -jar ableC.jar pts.xc -I/usr/local/include/cilk
 
 pts.out:	pts.c
 	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \

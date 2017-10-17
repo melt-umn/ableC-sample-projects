@@ -4,3 +4,4 @@ build.xml
 *.c
 *.out
 *.i
+*.gen_cpp

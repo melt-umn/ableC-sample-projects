@@ -22,3 +22,6 @@ silver -I ../ \
        -o ableC.jar $@ alternate_explicit
 
 rm -f build.xml
+rm -f *.gen_cpp
+rm -f *.c
+rm -f *.out

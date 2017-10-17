@@ -23,3 +23,6 @@ silver -I ../ \
        -o ableC.jar $@ alternate_terminals
 
 rm -f build.xml
+rm -f *.gen_cpp
+rm -f *.c
+rm -f *.out
