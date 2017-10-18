@@ -58,21 +58,11 @@ node {
     stage ("Build") {
 
       sh "mkdir -p generated"
+
+      checkout scm
+
       sh "rm -rf generated/* || true"
 
-  /* a node allocates an executor to actually do work */
-      node {
-        checkout([ $class: 'GitSCM',
-               branches: scm.branches,
-               doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-               extensions: [
-                 [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: 'ableC_sample_projects'],
-                 [ $class: 'CleanCheckout']
-               ],
-               submoduleCfg: scm.submoduleCfg,
-               userRemoteConfigs: scm.userRemoteConfigs
-             ])
         checkout([ $class: 'GitSCM',
                branches: [[name: '*/develop']],
                doGenerateSubmoduleConfigurations: false,
@@ -110,15 +100,13 @@ node {
                  [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
                ]
              ])
-      }
     }
-}
-
-stage ("Test") {
-  node {
-    withEnv(["PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}"]) {
-      dir("ableC_sample_projects") {
-        sh "make clean all"
+  stage ("Test") {
+    node {
+      withEnv(["PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}"]) {
+        dir("ableC_sample_projects") {
+          sh "make clean all"
+        }
       }
     }
   }
