@@ -60,7 +60,7 @@ stage ("Checkout") {
                ]
              ])
     checkout([ $class: 'GitSCM',
-               branches: [[name: '*/master']],
+               branches: scm.branches,
                doGenerateSubmoduleConfigurations: false,
                extensions: [
                  [ $class: 'RelativeTargetDirectory',
