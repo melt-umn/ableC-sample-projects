@@ -67,7 +67,7 @@ stage ("Checkout") {
                ]
              ])
     checkout([ $class: 'GitSCM',
-              branches: [[name: '*/develop']],
+              branches: [[name: '*/master']],
               extensions: [
                 [ $class: 'RelativeTargetDirectory',
                   relativeTargetDir: "extensions/ableC-regex-lib"],
@@ -75,6 +75,40 @@ stage ("Checkout") {
               ],
               userRemoteConfigs: [
                 [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
+              ]
+            ])
+    checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-sqlite"],
+                  [ $class: 'CleanCheckout']
+              ],
+              submoduleCfg: [],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-sqlite.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-condition-tables"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-algebraic-data-types"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-algebraic-data-types.git']
               ]
             ])
   }
