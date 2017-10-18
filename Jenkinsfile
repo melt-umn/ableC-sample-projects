@@ -43,35 +43,63 @@ properties([
 
 /* stages are pretty much just labels about what's going on */
 
-stage ("Checkout") {
+node {
+  try {
+
+    def ablec_base = (params.ABLEC_BASE == 'ableC') ? "${WORKSPACE}/${params.ABLEC_BASE}" : params.ABLEC_BASE
+    def env = [
+      "PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}",
+      "C_INCLUDE_PATH=/project/melt/Software/ext-libs/usr/local/include:${env.C_INCLUDE_PATH}",
+      "LIBRARY_PATH=/project/melt/Software/ext-libs/usr/local/lib:${env.LIBRARY_PATH}",
+      "ABLEC_BASE=${ablec_base}",
+      "EXTS_BASE=${WORKSPACE}/extensions",
+      "SVFLAGS=-G ${WORKSPACE}/generated"
+    ]
+
+    stage ("Build") {
+
+      sh "mkdir -p generated"
+      sh "rm -rf generated/* || true"
 
   /* a node allocates an executor to actually do work */
-  node {
-    checkout([ $class: 'GitSCM',
+      node {
+        checkout([ $class: 'GitSCM',
+               branches: scm.branches,
+               doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+               extensions: [
+                 [ $class: 'RelativeTargetDirectory',
+                   relativeTargetDir: 'ableC_sample_projects'],
+                 [ $class: 'CleanCheckout']
+               ],
+               submoduleCfg: scm.submoduleCfg,
+               userRemoteConfigs: scm.userRemoteConfigs
+             ])
+        checkout([ $class: 'GitSCM',
                branches: [[name: '*/develop']],
                doGenerateSubmoduleConfigurations: false,
                extensions: [
                  [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: 'ableC']
+                   relativeTargetDir: 'ableC'],
+                 [ $class: 'CleanCheckout']
                ],
                submoduleCfg: [],
                userRemoteConfigs: [
                  [url: 'https://github.com/melt-umn/ableC.git']
                ]
              ])
-    checkout([ $class: 'GitSCM',
-               branches: scm.branches,
+        checkout([ $class: 'GitSCM',
+               branches: [[name: '*/develop']],
                doGenerateSubmoduleConfigurations: false,
                extensions: [
                  [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: 'ableC_sample_projects']
+                   relativeTargetDir: "extensions/ableC-regex-lib"]
                ],
                submoduleCfg: [],
                userRemoteConfigs: [
-                 [url: 'https://github.com/melt-umn/ableC_sample_projects']
+                 [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
                ]
              ])
-    checkout([ $class: 'GitSCM',
+        checkout([ $class: 'GitSCM',
                branches: [[name: '*/develop']],
                doGenerateSubmoduleConfigurations: false,
                extensions: [
@@ -83,6 +111,8 @@ stage ("Checkout") {
                  [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
                ]
              ])
+      }
+    }
   }
 }
 
