@@ -86,7 +86,6 @@ node {
                   ],
                   submoduleCfg: scm.submoduleCfg,
                   userRemoteConfigs: scm.userRemoteConfigs
-                  ]
                 ])
         checkout([ $class: 'GitSCM',
                   branches: [[name: '*/master']],
