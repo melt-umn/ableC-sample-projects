@@ -89,7 +89,9 @@ stage ("Checkout") {
 stage ("Test") {
   node {
     withEnv(["PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}"]) {
-      sh "make clean all"
+      dir("ableC_sample_projects") {
+        sh "make clean all"
+      }
     }
   }
 }
