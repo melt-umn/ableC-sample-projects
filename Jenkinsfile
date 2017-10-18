@@ -45,65 +45,84 @@ properties([
 
 node {
 
-    def ablec_base = (params.ABLEC_BASE == 'ableC') ? "${WORKSPACE}/${params.ABLEC_BASE}" : params.ABLEC_BASE
-    def env = [
-      "PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}",
-      "C_INCLUDE_PATH=/project/melt/Software/ext-libs/usr/local/include:${env.C_INCLUDE_PATH}",
-      "LIBRARY_PATH=/project/melt/Software/ext-libs/usr/local/lib:${env.LIBRARY_PATH}",
-      "ABLEC_BASE=${ablec_base}",
-      "EXTS_BASE=${WORKSPACE}/extensions",
-      "SVFLAGS=-G ${WORKSPACE}/generated"
-    ]
+  def ablec_base = (params.ABLEC_BASE == 'ableC') ? "${WORKSPACE}/${params.ABLEC_BASE}" : params.ABLEC_BASE
+  def env = [
+    "PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}",
+    "C_INCLUDE_PATH=/project/melt/Software/ext-libs/usr/local/include:${env.C_INCLUDE_PATH}",
+    "LIBRARY_PATH=/project/melt/Software/ext-libs/usr/local/lib:${env.LIBRARY_PATH}",
+    "ABLEC_BASE=${ablec_base}",
+    "EXTS_BASE=${WORKSPACE}/extensions",
+    "SVFLAGS=-G ${WORKSPACE}/generated"
+  ]
 
-    stage ("Build") {
+  stage ("Build") {
 
-      sh "mkdir -p generated"
+    sh "mkdir -p generated"
 
-      checkout scm
+    checkout scm
 
-      sh "rm -rf generated/* || true"
+    sh "rm -rf generated/* || true"
 
-        checkout([ $class: 'GitSCM',
-               branches: [[name: '*/develop']],
-               doGenerateSubmoduleConfigurations: false,
-               extensions: [
-                 [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: 'ableC'],
-                 [ $class: 'CleanCheckout']
-               ],
-               submoduleCfg: [],
-               userRemoteConfigs: [
-                 [url: 'https://github.com/melt-umn/ableC.git']
-               ]
-             ])
-        checkout([ $class: 'GitSCM',
-               branches: [[name: '*/develop']],
-               doGenerateSubmoduleConfigurations: false,
-               extensions: [
-                 [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: "extensions/ableC-regex-lib"]
-               ],
-               submoduleCfg: [],
-               userRemoteConfigs: [
-                 [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
-               ]
-             ])
-        checkout([ $class: 'GitSCM',
-               branches: [[name: '*/develop']],
-               doGenerateSubmoduleConfigurations: false,
-               extensions: [
-                 [ $class: 'RelativeTargetDirectory',
-                   relativeTargetDir: "extensions/ableC-condition-tables"]
-               ],
-               submoduleCfg: [],
-               userRemoteConfigs: [
-                 [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
-               ]
-             ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: 'ableC'],
+                [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-regex-lib"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-sqlite"],
+                  [ $class: 'CleanCheckout']
+              ],
+              submoduleCfg: [],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-sqlite.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-condition-tables"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
+              ]
+            ])
+      checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-condition-tables"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-algebraic-data-types.git']
+              ]
+            ])
     }
   stage ("Test") {
     node {
-      withEnv(["PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}"]) {
+      withEnv(env) {
         dir("ableC_sample_projects") {
           sh "make clean all"
         }
