@@ -11,7 +11,7 @@ GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
 # Flags passed to silver including the appropriate directories
 override SVFLAGS+=$(addprefix -I ,$(GRAMMAR_DIRS))
 
-all: ableC.jar examples
+all: pts.out
 
 ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
@@ -19,7 +19,7 @@ ableC.jar: $(GRAMMAR_SOURCES)
 
 
 pts.c:	pts.xc ableC.jar
-	java -jar ableC.jar pts.xc -I/usr/local/include/cilk
+	java -Xss6M -jar ableC.jar pts.xc -I/usr/local/include/cilk
 
 pts.out:	pts.c
 	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \

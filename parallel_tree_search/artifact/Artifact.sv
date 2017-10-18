@@ -15,7 +15,7 @@ parser extendedParser :: cst:Root {
   edu:umn:cs:melt:exts:ableC:cilk;
 
   prefer
-   edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:matchKeyword:Match_t
+   edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:Match_t
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
 

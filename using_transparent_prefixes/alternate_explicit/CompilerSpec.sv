@@ -37,8 +37,8 @@ parser extendedParser :: cst:Root {
    terminals are named directly, the grammars declaring them are
    imported above.
 -}
-disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t
-{ pluck edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t; }
+disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t
+{ pluck edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t; }
 
 
 {- Similarly, one can define transparent prefix terminals explicitly

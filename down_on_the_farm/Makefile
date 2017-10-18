@@ -24,19 +24,19 @@ $(ABLEC_JAR): $(GRAMMAR_SOURCES)
 all: accounting.out populate_table.out
 
 livestock.c:	livestock.xc livestock.h ableC.jar
-	java -jar ableC.jar livestock.xc
+	java -Xss6M -jar ableC.jar livestock.xc
 
 livestock.o:	livestock.c
 	gcc -c livestock.c
 
 populate_table.c:	populate_table.xc ableC.jar
-	java -jar ableC.jar populate_table.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar populate_table.xc -I ../../extensions/ableC-sqlite/include
 
 populate_table.o:	populate_table.c
 	gcc -c populate_table.c
 
 serialize.c:	serialize.xc serialize.h ableC.jar
-	java -jar ableC.jar serialize.xc
+	java -Xss6M -jar ableC.jar serialize.xc
 
 serialize.o:	serialize.c
 	gcc -c serialize.c
@@ -45,7 +45,7 @@ populate_table.out:	populate_table.o serialize.o livestock.o
 	gcc -o populate_table.out populate_table.o serialize.o livestock.o  -lpthread -ldl -lsqlite3
 
 accounting.c:	accounting.xc ableC.jar
-	java -jar ableC.jar accounting.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar accounting.xc -I ../../extensions/ableC-sqlite/include
 
 accounting.o:	accounting.c
 	gcc -c accounting.c

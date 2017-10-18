@@ -14,7 +14,7 @@ export ANT_OPTS="-Xss80M -Xmx4000M"
 
 PATH_TO_ableC="../../../ableC"
 
-PATH_TO_tables="../../../ableC/extensions/conditional-tables"
+PATH_TO_tables="../../../extensions/ableC-condition-tables/grammars"
 
 silver -I ../ \
        -I $PATH_TO_ableC \
@@ -22,3 +22,6 @@ silver -I ../ \
        -o ableC.jar $@ alternate_explicit
 
 rm -f build.xml
+rm -f *.gen_cpp
+rm -f *.c
+rm -f *.out
