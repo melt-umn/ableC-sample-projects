@@ -44,7 +44,6 @@ properties([
 /* stages are pretty much just labels about what's going on */
 
 node {
-  try {
 
     def ablec_base = (params.ABLEC_BASE == 'ableC') ? "${WORKSPACE}/${params.ABLEC_BASE}" : params.ABLEC_BASE
     def env = [
@@ -113,7 +112,6 @@ node {
              ])
       }
     }
-  }
 }
 
 stage ("Test") {
