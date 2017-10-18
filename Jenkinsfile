@@ -12,6 +12,11 @@ properties([
         name: 'SILVER_BASE',
         defaultValue: '/export/scratch/melt-jenkins/custom-silver/',
         description: 'Silver installation path to use. Currently assumes only one build machine. Otherwise a path is not sufficient, we need to copy artifacts or something else.'
+      ],
+      [ $class: 'StringParameterDefinition',
+        name: 'ABLEC_BASE',
+        defaultValue: "ableC",
+        description: 'AbleC installation path to use.'
       ]
     ]
   ],
@@ -40,7 +45,23 @@ properties([
 node {
   try {
 
-    stage ("Checkout") {
+    /* the full path to ableC, use parameter as-is if changed from default,
+     * otherwise prepend full path to workspace */
+    def ablec_base = (params.ABLEC_BASE == 'ableC') ? "${WORKSPACE}/${params.ABLEC_BASE}" : params.ABLEC_BASE
+    def env = [
+      "PATH=${params.SILVER_BASE}/support/bin/:${env.PATH}",
+      "C_INCLUDE_PATH=/project/melt/Software/ext-libs/usr/local/include:${env.C_INCLUDE_PATH}",
+      "LIBRARY_PATH=/project/melt/Software/ext-libs/usr/local/lib:${env.LIBRARY_PATH}",
+      "ABLEC_BASE=${ablec_base}",
+      "EXTS_BASE=${WORKSPACE}/extensions",
+      "SVFLAGS=-G ${WORKSPACE}/generated"
+    ]
+
+    stage ("Build") {
+
+      /* Clean Silver-generated files from previous builds in this workspace */
+      sh "mkdir -p generated"
+      sh "rm -rf generated/* || true"
 
       /* a node allocates an executor to actually do work */
       node {
@@ -139,9 +160,9 @@ node {
     }
 
     stage ("Test") {
-      node {
-        withEnv(["PATH=${SILVER_BASE}/support/bin/:${env.PATH}"]) {
-          sh "cd ableC_sample_projects && make clean all"
+      withEnv(env) {
+        dir("ableC_sample_projects") {
+          sh "make clean all"
         }
       }
     }
