@@ -6,13 +6,9 @@ import edu:umn:cs:melt:ableC:drivers:compile;
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;
 
-  edu:umn:cs:melt:exts:ableC:algebraicDataTypes;
-
   edu:umn:cs:melt:exts:ableC:sqlite;
 
   edu:umn:cs:melt:exts:ableC:tables;
-
-  edu:umn:cs:melt:exts:ableC:regex; 
 
   -- Transparent prefixes to resolve lexical ambiguities.
   edu:umn:cs:melt:exts:ableC:algebraicDataTypes prefix with "ADT";
