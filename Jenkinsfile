@@ -79,14 +79,13 @@ node {
                 ])
         checkout([ $class: 'GitSCM',
                   branches: scm.branches,
-                  doGenerateSubmoduleConfigurations: false,
+                  doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: 'ableC_sample_projects']
                   ],
-                  submoduleCfg: [],
-                  userRemoteConfigs: [
-                    [url: 'https://github.com/melt-umn/ableC_sample_projects']
+                  submoduleCfg: scm.submoduleCfg,
+                  userRemoteConfigs: scm.userRemoteConfigs
                   ]
                 ])
         checkout([ $class: 'GitSCM',
