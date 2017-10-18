@@ -66,6 +66,17 @@ stage ("Checkout") {
                  [url: 'https://github.com/melt-umn/ableC_sample_projects']
                ]
              ])
+    checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-regex-lib"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
+              ]
+            ])
   }
 }
 
