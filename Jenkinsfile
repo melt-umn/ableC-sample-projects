@@ -78,6 +78,28 @@ stage ("Checkout") {
               ]
             ])
     checkout([ $class: 'GitSCM',
+              branches: [[name: '*/master']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-regex-pattern-matching"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-regex-pattern-matching.git']
+              ]
+            ])
+    checkout([ $class: 'GitSCM',
+              branches: [[name: '*/develop']],
+              extensions: [
+                [ $class: 'RelativeTargetDirectory',
+                  relativeTargetDir: "extensions/ableC-cilk"],
+                  [ $class: 'CleanCheckout']
+              ],
+              userRemoteConfigs: [
+                [url: 'https://github.com/melt-umn/ableC-cilk.git']
+              ]
+            ])
+    checkout([ $class: 'GitSCM',
               branches: [[name: '*/develop']],
               extensions: [
                 [ $class: 'RelativeTargetDirectory',
