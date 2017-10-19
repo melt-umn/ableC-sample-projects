@@ -66,11 +66,13 @@ node {
       /* a node allocates an executor to actually do work */
       node {
         checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/develop']],
+//                  branches: [[name: '*/develop']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   doGenerateSubmoduleConfigurations: false,
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
-                      relativeTargetDir: 'ableC']
+                      relativeTargetDir: 'ableC'],
+                    [ $class: 'CleanCheckout']
                   ],
                   submoduleCfg: [],
                   userRemoteConfigs: [
@@ -82,7 +84,8 @@ node {
                   doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
-                      relativeTargetDir: 'ableC_sample_projects']
+                      relativeTargetDir: 'ableC_sample_projects'],
+                    [ $class: 'CleanCheckout']
                   ],
                   submoduleCfg: scm.submoduleCfg,
                   userRemoteConfigs: scm.userRemoteConfigs
