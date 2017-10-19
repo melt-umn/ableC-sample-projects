@@ -88,7 +88,8 @@ node {
                   userRemoteConfigs: scm.userRemoteConfigs
                 ])
         checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/master']],
+//                  branches: [[name: '*/master']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-regex-lib"],
@@ -99,7 +100,8 @@ node {
                   ]
                 ])
         checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/master']],
+//                  branches: [[name: '*/master']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-regex-pattern-matching"],
@@ -110,7 +112,8 @@ node {
                   ]
                 ])
         checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/develop']],
+//                  branches: [[name: '*/develop']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-cilk"],
@@ -121,7 +124,8 @@ node {
                   ]
                 ])
         checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/develop']],
+//                  branches: [[name: '*/develop']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-sqlite"],
@@ -133,7 +137,8 @@ node {
                   ]
                 ])
           checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/develop']],
+//                  branches: [[name: '*/develop']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-condition-tables"],
@@ -144,7 +149,8 @@ node {
                   ]
                 ])
           checkout([ $class: 'GitSCM',
-                  branches: [[name: '*/develop']],
+//                  branches: [[name: '*/develop']],
+                  branches: [[name: '*/feature/type_qualifiers']],
                   extensions: [
                     [ $class: 'RelativeTargetDirectory',
                       relativeTargetDir: "extensions/ableC-algebraic-data-types"],
