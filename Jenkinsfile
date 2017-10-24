@@ -74,7 +74,8 @@ node {
                 submoduleCfg: scm.submoduleCfg,
                 userRemoteConfigs: scm.userRemoteConfigs
                 ])
-      
+
+      // Checkout ableC
       try {
         checkout([ $class: 'GitSCM',
                    branches: scm.branches,
@@ -103,7 +104,8 @@ node {
                    ]
                  ])
       }
-      
+
+      // Checkout dependanices
       try {
         checkout([ $class: 'GitSCM',
                    branches: scm.branches,
