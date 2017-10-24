@@ -106,174 +106,12 @@ node {
       }
 
       // Checkout dependanices
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-regex-lib'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-regex-lib'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-regex-lib.git']
-                   ]
-                 ])
-      }
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-regex-pattern-matching'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-regex-pattern-matching.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-regex-pattern-matching'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-regex-pattern-matching.git']
-                   ]
-                 ])
-      }
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-cilk'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-cilk.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-cilk'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-cilk.git']
-                   ]
-                 ])
-      }
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-sqlite'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-sqlite.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-sqlite'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-sqlite.git']
-                   ]
-                 ])
-      }
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-condition-tables'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-condition-tables'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-condition-tables.git']
-                   ]
-                 ])
-      }
-      try {
-        checkout([ $class: 'GitSCM',
-                   branches: scm.branches,
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-algebraic-data-types'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-algebraic-data-types.git']
-                   ]
-                 ])
-      }
-      catch (e) {
-        checkout([ $class: 'GitSCM',
-                   branches: [[name: '*/develop']],
-                   doGenerateSubmoduleConfigurations: false,
-                   extensions: [
-                     [ $class: 'RelativeTargetDirectory',
-                       relativeTargetDir: 'extensions/ableC-algebraic-data-types'],
-                     [ $class: 'CleanCheckout']
-                   ],
-                   userRemoteConfigs: [
-                     [url: 'https://github.com/melt-umn/ableC-algebraic-data-types.git']
-                   ]
-                 ])
-      }
+      checkoutExtension('https://github.com/melt-umn', 'ableC-regex-lib')
+      checkoutExtension('https://github.com/melt-umn', 'ableC-regex-pattern-matching')
+      checkoutExtension('https://github.com/melt-umn', 'ableC-cilk')
+      checkoutExtension('https://github.com/melt-umn', 'ableC-sqlite')
+      checkoutExtension('https://github.com/melt-umn', 'ableC-condition-tables')
+      checkoutExtension('https://github.com/melt-umn', 'ableC-algebraic-data-types')
 
       sh "mkdir -p generated"
     }
@@ -303,12 +141,43 @@ node {
   }
 }
 
+def checkoutExtension(String orgURL, String extension, String defaultBranch = 'develop') {
+  try {
+    checkout([ $class: 'GitSCM',
+               branches: scm.branches,
+               doGenerateSubmoduleConfigurations: false,
+               extensions: [
+                 [ $class: 'RelativeTargetDirectory',
+                   relativeTargetDir: "extensions/${extension}"],
+                 [ $class: 'CleanCheckout']
+               ],
+               userRemoteConfigs: [
+                 [url: "${orgURL}/${extension}.git"]
+               ]
+             ])
+  }
+  catch (e) {
+    checkout([ $class: 'GitSCM',
+               branches: [[name: "*/${defaultBranch}"]],
+               doGenerateSubmoduleConfigurations: false,
+               extensions: [
+                 [ $class: 'RelativeTargetDirectory',
+                   relativeTargetDir: "extensions/${extension}"],
+                 [ $class: 'CleanCheckout']
+               ],
+               userRemoteConfigs: [
+                 [url: "${orgURL}/${extension}.git"]
+               ]
+             ])
+  }
+}
+
 /* Slack / email notification
  * notifyBuild() author: fahl-design
  * https://bitbucket.org/snippets/fahl-design/koxKe */
 def notifyBuild(String buildStatus = 'STARTED') {
   // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  buildStatus = buildStatus ?: 'SUCCESSFUL'
 
   // Default values
   def colorName = 'RED'
