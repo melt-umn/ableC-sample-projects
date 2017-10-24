@@ -141,6 +141,9 @@ node {
   }
 }
 
+/* Attempt to check out an extension with a given organization URL from a branch
+ * with the same name as the current branch.  If this fails, then try checking
+ * out a default branch. */
 def checkoutExtension(String orgURL, String extension, String defaultBranch = 'develop') {
   try {
     checkout([ $class: 'GitSCM',
