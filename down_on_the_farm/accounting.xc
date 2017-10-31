@@ -15,14 +15,19 @@ int main() {
 
     int mood = 1;
 
+    // sqlite extension: declare a variable called `farm_db`
+    //   that is an open connection to the database
     use "farm.db" with {
         table farm (serialized_animal VARCHAR)
     } as farm_db;
 
+    // sqlite extension: declare a variable called `animal_rows`
+    //   that is the result of a query
     on farm_db query {
         SELECT * FROM farm
     } as animal_rows;
 
+    // sqlite extension: loop over the result of the query
     foreach (animal_row : animal_rows) {
         Animal *a = deserialize_animal(animal_row.serialized_animal);
         if (a == NULL) {
@@ -32,6 +37,7 @@ int main() {
         float expenses = 0.0;
         float income = 0.0;
 
+        // ADT extension: pattern match on `a`
         match (a) {
             Chicken(nm, _, _) -> {
                 printf("Chicken: %s\n", nm);
@@ -55,6 +61,7 @@ int main() {
             }
 
             Goat(nm, bday, gallons) -> {
+                // Condition tables and regular expression extensions used together
                 if ( table {
                         bday =~ /___10_*/ : T F
                         gallons > 10      : * T

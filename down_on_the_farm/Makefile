@@ -15,13 +15,11 @@ GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
 # Flags passed to silver including the appropriate directories
 override SVFLAGS+=$(addprefix -I ,$(GRAMMAR_DIRS))
 
+all: accounting.out populate_table.out
+
 $(ABLEC_JAR): $(GRAMMAR_SOURCES)
 	touch $(wildcard $(ARTIFACT)/*.sv)
 	silver -o $@ $(SVFLAGS) $(ARTIFACT)
-
-
-
-all: accounting.out populate_table.out
 
 livestock.c:	livestock.xc livestock.h ableC.jar
 	java -Xss6M -jar ableC.jar livestock.xc
