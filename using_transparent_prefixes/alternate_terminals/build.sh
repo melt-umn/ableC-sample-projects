@@ -20,7 +20,7 @@ PATH_TO_tables="../../../extensions/ableC-condition-tables/grammars"
 silver -I ../ \
        -I $PATH_TO_ableC \
        -I $PATH_TO_tables \
-       -o ableC.jar $@ alternate_terminals
+       -o ableC.jar $SVFLAGS $@ alternate_terminals
 
 rm -f build.xml
 rm -f *.gen_cpp
