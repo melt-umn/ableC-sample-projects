@@ -28,7 +28,7 @@ livestock.o:	livestock.c
 	gcc -c livestock.c
 
 populate_table.c:	populate_table.xc ableC.jar
-	java -Xss6M -jar ableC.jar populate_table.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar populate_table.xc -I $(EXTS_BASE)/ableC-sqlite/include
 
 populate_table.o:	populate_table.c
 	gcc -c populate_table.c
@@ -43,7 +43,7 @@ populate_table.out:	populate_table.o serialize.o livestock.o
 	gcc -o populate_table.out populate_table.o serialize.o livestock.o  -lpthread -ldl -lsqlite3
 
 accounting.c:	accounting.xc ableC.jar
-	java -Xss6M -jar ableC.jar accounting.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar accounting.xc -I $(EXTS_BASE)/ableC-sqlite/include
 
 accounting.o:	accounting.c
 	gcc -c accounting.c

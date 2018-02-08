@@ -1,11 +1,6 @@
 #!/bin/bash
 
-# turn off option to exit on non-zero return code.
-set +e
-
-./tests.sh
-
-if [ "$?" == "0" ]; then
+if ./tests.sh; then
     echo ""
     echo "Success!"
     echo ""

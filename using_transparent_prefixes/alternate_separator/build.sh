@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 # When grammars have simple names, such as 'alternate_separator' used
 # here, the name may be used by others.  Thus, the 'touch' below
 # ensures that we don't re-use compilation results from another
@@ -12,12 +14,14 @@ touch CompilerSpec.sv
 # table.
 export ANT_OPTS="-Xss80M -Xmx4000M"
 
-PATH_TO_ableC="../../../ableC"
+# Defaults if env var not set:
+: ${ABLEC_BASE:=../../../ableC}
+: ${EXTS_BASE:=../../../extensions}
 
-PATH_TO_tables="../../../extensions/ableC-condition-tables/grammars"
+PATH_TO_tables="${EXTS_BASE}/ableC-condition-tables/grammars"
 
 silver -I ../ \
-       -I $PATH_TO_ableC \
+       -I $ABLEC_BASE \
        -I $PATH_TO_tables \
        -o ableC.jar $@ alternate_separator
 

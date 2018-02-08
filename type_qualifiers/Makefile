@@ -19,7 +19,7 @@ ableC.jar: $(GRAMMAR_SOURCES)
 	silver -o $@ $(SVFLAGS) artifact
 
 example1.c:	example1.xc ableC.jar
-	java -Xss6M -jar ableC.jar example1.xc -I ../../extensions/ableC-string/include
+	java -Xss6M -jar ableC.jar example1.xc -I $(EXTS_BASE)/ableC-string/include
 
 example1.o:	example1.c
 	gcc -std=gnu11 -c example1.c
