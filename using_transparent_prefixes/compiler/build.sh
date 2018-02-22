@@ -15,13 +15,14 @@ export ANT_OPTS="-Xss80M -Xmx4000M"
 # Defaults if env var not set:
 : ${ABLEC_BASE:=../../../ableC}
 : ${EXTS_BASE:=../../../extensions}
+: ${SVFLAGS:=""}
 
 PATH_TO_tables="${EXTS_BASE}/ableC-condition-tables/grammars"
 
 silver -I ../ \
        -I $ABLEC_BASE \
        -I $PATH_TO_tables \
-       -o ableC.jar $@ compiler
+       -o ableC.jar $SVFLAGS $@ compiler
 
 rm -f build.xml
 rm -f *.gen_cpp
