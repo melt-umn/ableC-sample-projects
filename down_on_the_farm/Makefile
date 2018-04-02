@@ -15,13 +15,11 @@ GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
 # Flags passed to silver including the appropriate directories
 override SVFLAGS+=$(addprefix -I ,$(GRAMMAR_DIRS))
 
+all: accounting.out populate_table.out
+
 $(ABLEC_JAR): $(GRAMMAR_SOURCES)
 	touch $(wildcard $(ARTIFACT)/*.sv)
 	silver -o $@ $(SVFLAGS) $(ARTIFACT)
-
-
-
-all: accounting.out populate_table.out
 
 livestock.c:	livestock.xc livestock.h ableC.jar
 	java -Xss6M -jar ableC.jar livestock.xc
@@ -30,7 +28,7 @@ livestock.o:	livestock.c
 	gcc -c livestock.c
 
 populate_table.c:	populate_table.xc ableC.jar
-	java -Xss6M -jar ableC.jar populate_table.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar populate_table.xc -I $(EXTS_BASE)/ableC-sqlite/include
 
 populate_table.o:	populate_table.c
 	gcc -c populate_table.c
@@ -45,7 +43,7 @@ populate_table.out:	populate_table.o serialize.o livestock.o
 	gcc -o populate_table.out populate_table.o serialize.o livestock.o  -lpthread -ldl -lsqlite3
 
 accounting.c:	accounting.xc ableC.jar
-	java -Xss6M -jar ableC.jar accounting.xc -I ../../extensions/ableC-sqlite/include
+	java -Xss6M -jar ableC.jar accounting.xc -I $(EXTS_BASE)/ableC-sqlite/include
 
 accounting.o:	accounting.c
 	gcc -c accounting.c
