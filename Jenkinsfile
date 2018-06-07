@@ -22,7 +22,7 @@ try {
 
   stage ("Test") {
     withEnv(newenv) {
-      dir("extensions/ableC_sample_projects") {
+      dir("extensions/ableC-sample-projects") {
         sh "make clean all"
       }
     }
