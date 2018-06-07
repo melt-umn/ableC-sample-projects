@@ -17,12 +17,12 @@ try {
   stage ("Checkout") {
     // We'll check it out underneath extensions/ just so we can re-use this code
     // It shouldn't hurt because newenv should specify where extensions and ablec_base can be found
-    newenv = ablec.prepareWorkspace(extension_name, extensions)
+    newenv = ablec.prepareWorkspace(extension_name, extensions, true)
   }
 
   stage ("Test") {
     withEnv(newenv) {
-      dir("extensions/ableC_sample_projects") {
+      dir("extensions/ableC-sample-projects") {
         sh "make clean all"
       }
     }
