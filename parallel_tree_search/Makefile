@@ -15,7 +15,7 @@ all: pts.out
 
 ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
-	silver -o $@ $(SVFLAGS) artifact
+	silver-ableC -o $@ $(SVFLAGS) artifact
 
 
 pts.c:	pts.xc ableC.jar

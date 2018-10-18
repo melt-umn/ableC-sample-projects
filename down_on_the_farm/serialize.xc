@@ -8,17 +8,17 @@ enum {CHICKEN_T=1, GOAT_T};
 enum {KALE_T=1, MEALWORMS_T};
 
 /** @return length needed to serialize an animal */
-size_t serialize_len(Animal *a);
+size_t serialize_len(Animal a);
 /** @return write one byte containing length of s (limit 254) followed by s */
 char *serialize_str(char *dest, const char *s);
 /** @return length needed to serialize s */
 size_t serialize_str_len(const char *s);
 /** @return write string representation of a treat */
-char *serialize_treat(char *dest, Treat *t);
+char *serialize_treat(char *dest, Treat t);
 /* TODO: strnlen() doesn't exist in ableC because _GNU_SOURCE not defined? */
 size_t strnlen(const char *s, size_t maxlen);
 
-char *serialize_animal(Animal *a)
+char *serialize_animal(Animal a)
 {
     char *ret = malloc(serialize_len(a));
     char *ret_end_ptr = ret;
@@ -45,18 +45,16 @@ char *serialize_animal(Animal *a)
     return ret;
 }
 
-Animal *deserialize_animal(const unsigned char *serialized_animal)
+int deserialize_animal(Animal *a, const unsigned char *serialized_animal)
 {
     const unsigned char *end_ptr = serialized_animal;
     if (end_ptr == NULL || *end_ptr == '\0')
-        return NULL;
-    unsigned char ty = *end_ptr++; 
-
-    Animal *a = NULL;
+        return 1;
+    unsigned char ty = *end_ptr++;
 
     if (ty == CHICKEN_T) {
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
 
         /* strncpy the name while advancing end_ptr */
         size_t nm_size = *end_ptr++ - 1;
@@ -68,27 +66,27 @@ Animal *deserialize_animal(const unsigned char *serialized_animal)
         nm[i] = '\0';
 
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
 
         unsigned char treat_ty = *end_ptr++; 
-        Treat *treat = NULL;
+        Treat treat;
         if (treat_ty == KALE_T) {
             treat = Kale();
         } else if (treat_ty == MEALWORMS_T) {
             treat = Mealworms();
         } else {
-            return NULL;
+            return 1;
         }
 
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
         int eggs = *end_ptr++ - 1;
 
 //        printf("Chicken: [%s], [%d], [%d]\n", nm, treat_ty, eggs);
-        a = Chicken((const char *) nm, treat, eggs);
+        *a = Chicken((const char *) nm, treat, eggs);
     } else if (ty == GOAT_T) {
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
 
         /* TODO: don't duplicate this */
         /* strncpy the name while advancing end_ptr */
@@ -101,7 +99,7 @@ Animal *deserialize_animal(const unsigned char *serialized_animal)
         nm[i] = '\0';
 
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
 
         size_t bday_size = *end_ptr++ - 1;
         char *bday = malloc(bday_size + 1);
@@ -112,19 +110,19 @@ Animal *deserialize_animal(const unsigned char *serialized_animal)
         bday[i] = '\0';
 
         if (*end_ptr == '\0')
-            return NULL;
+            return 1;
         int gallons = *end_ptr++ - 1;
 
 //        printf("Goat: [%s], [%s], [%d]\n", nm, bday, gallons);
-        a = Goat((const char *) nm, (const char *) bday, gallons);
+        *a = Goat((const char *) nm, (const char *) bday, gallons);
     } else {
-        return NULL;
+        return 1;
     }
 
-    return a;
+    return 0;
 }
 
-size_t serialize_len(Animal *a)
+size_t serialize_len(Animal a)
 {
     /* first byte is animal type */
     size_t ret = 1;
@@ -156,7 +154,7 @@ size_t serialize_str_len(const char *s)
     return 1 + strnlen(s, 254);
 }
 
-char *serialize_treat(char *dest, Treat *t)
+char *serialize_treat(char *dest, Treat t)
 {
     match (t) {
         Kale() -> {
