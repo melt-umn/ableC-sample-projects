@@ -16,7 +16,8 @@ try {
 
   stage ("Checkout") {
     // We'll check it out underneath extensions/ just so we can re-use this code
-    // It shouldn't hurt because newenv should specify where extensions and ablec_base can be found
+      // It shouldn't hurt because newenv should specify where extensions and ablec_base can be found
+      echo env.BRANCH_NAME
     newenv = ablec.prepareWorkspace(extension_name, extensions, true)
   }
 
