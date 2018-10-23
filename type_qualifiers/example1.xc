@@ -39,7 +39,7 @@ int eval(check struct Expr * nonnull e)
 	return val;
 }
 
-int fib(int n) <watch>
+int fib(int n) watch
 {
 	if (n < 2) {
 		return n;
