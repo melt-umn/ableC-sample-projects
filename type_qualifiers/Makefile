@@ -12,20 +12,20 @@ GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
 # Flags passed to silver including the appropriate directories
 override SVFLAGS+=$(addprefix -I ,$(GRAMMAR_DIRS))
 
-all: example1.out
+all: tq.out
 
 ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
 	silver -o $@ $(SVFLAGS) artifact
 
-example1.c:	example1.xc ableC.jar
-	java -Xss6M -jar ableC.jar example1.xc -I $(EXTS_BASE)/ableC-string/include
+tq.c:	tq.xc ableC.jar
+	java -Xss6M -jar ableC.jar tq.xc -I $(EXTS_BASE)/ableC-string/include
 
-example1.o:	example1.c
-	gcc -std=gnu11 -c example1.c
+tq.o:	tq.c
+	gcc -std=gnu11 -c tq.c
 
-example1.out:	example1.o
-	gcc -lgc -o example1.out example1.o
+tq.out:	tq.o
+	gcc -lgc -o tq.out tq.o
 
 clean:
 	rm -f *~ *.i *.c *.o *.out *.test *.jar *.copperdump.html build.xml
