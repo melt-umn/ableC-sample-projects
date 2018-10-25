@@ -1,10 +1,10 @@
 grammar artifact;
 
-import edu:umn:cs:melt:ableC:concretesyntax as cst;
 import edu:umn:cs:melt:ableC:drivers:compile;
 
-parser extendedParser :: cst:Root {
-  edu:umn:cs:melt:ableC:concretesyntax;
+construct ableC as
+edu:umn:cs:melt:ableC:concretesyntax
+translator using
 
   edu:umn:cs:melt:exts:ableC:algebraicDataTypes prefix with "ADT";
 
@@ -19,11 +19,3 @@ parser extendedParser :: cst:Root {
   over
    edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
 
-}
-
-
-function main
-IOVal<Integer> ::= args::[String] io_in::IO
-{
-  return driver(args, io_in, extendedParser);
-}
