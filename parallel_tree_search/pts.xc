@@ -18,21 +18,21 @@ datatype Tree {
     Leaf (const char*);
 };
 
+allocate datatype Tree with malloc;
+
 cilk int count_matches (Tree *t) ;
 
 cilk int main (int argv, char **argc) {
     int count;
     Tree *tree ;
     tree =
-        Fork (
-            Fork ( Leaf ("hello"),
-                   Leaf ("world"),
-                   "123" ),
-            Fork ( Leaf ("abc000"),
-                   Leaf ("wow456wow"),
-                   "xyz" ),
-            "9"
-            );
+      malloc_Fork (malloc_Fork ( malloc_Leaf ("hello"),
+                                 malloc_Leaf ("world"),
+                                 "123" ),
+                   malloc_Fork ( malloc_Leaf ("abc000"),
+                                 malloc_Leaf ("wow456wow"),
+                                 "xyz" ),
+                   "9");
 
     spawn count = count_matches(tree);
     sync;
@@ -53,7 +53,7 @@ cilk int count_matches (Tree *t0) {
     Tree *t = t0;
 
     match ( t ) {
-        Fork(t1,t2,str)-> { 
+        &Fork(t1,t2,str)-> { 
             int res_t1, res_t2, res_str;
             spawn res_t1 = count_matches(t1);
             spawn res_t2 = count_matches(t2);
@@ -71,7 +71,7 @@ cilk int count_matches (Tree *t0) {
             cilk return res_t1 + res_t2 + res_str ; 
     }
 
-    Leaf( /[1-9]+/ ) -> { cilk return 1 ; }
+    &Leaf( /[1-9]+/ ) -> { cilk return 1 ; }
     _ -> { cilk return 0 ; }
   } ;
     

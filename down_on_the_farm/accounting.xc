@@ -29,8 +29,8 @@ int main() {
 
     // sqlite extension: loop over the result of the query
     foreach (animal_row : animal_rows) {
-        Animal *a = deserialize_animal(animal_row.serialized_animal);
-        if (a == NULL) {
+        Animal a;
+        if (deserialize_animal(&a, animal_row.serialized_animal)) {
             continue;
         }
 
@@ -79,7 +79,6 @@ int main() {
 
         total_expenses += expenses;
         total_income += income;
-        freeA(a);
     }
 
     printf ("\nTotals:\n");
