@@ -43,8 +43,10 @@ accounting.o:	accounting.c
 	gcc -c accounting.c
 
 accounting.out:	accounting.o serialize.o
-	gcc -o accounting.out accounting.o serialize.o -lsqlite3 -lpthread -ldl
+	gcc -o accounting.out accounting.o serialize.o sqlite3.o -lpthread -ldl
 
+sqlite3.o: $(EXTS_BASE)/ableC-sqlite/src/sqlite3.c
+	gcc -c $(EXTS_BASE)/ableC-sqlite/src/sqlite3.c -I$(EXTS_BASE)/ableC-sqlite/include
 
 clean:
 	rm -f *.c *.i *.o accounting.out populate_table.out ableC.jar build.xml farm.db
