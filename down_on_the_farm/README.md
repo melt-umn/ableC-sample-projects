@@ -14,30 +14,30 @@ complex cases.
 ## Running the examples
 
 1. Build the `ableC` compiler. This creates `ableC.jar`.
-   ```
-  % make ableC.jar
-   ```
+```
+% make ableC.jar
+```
 
 2. Compile the sample programs. This uses `ableC.jar` to translate the
 user-written extended C `accounting.xc` and `populate_table.xc` to plain C as
 `accounting.c` and `populate_table.c`, then further uses gcc to create the
 executables `accounting.out` and `populate_table.out`.
-   ```
-  % make all
-   ```
+```
+make all
+```
 
 3. Create an empty SQLite3 database called `farm.db`.
-   ```
-  % ./create_database.sh
-   ```
+```
+% ./create_database.sh
+```
 
 4. Populate `farm.db` with sample animals.
-   ```
-  % ./populate_table.out
-   ```
+```
+% ./populate_table.out
+```
 
 5. Analyze `farm.db` to compute income and expenses.
-   ```
-  % ./accounting.out
-   ```
+```
+% ./accounting.out
+```
 
