@@ -1,0 +1,23 @@
+#ifndef _SUM_INT_XH
+#define _SUM_INT_XH
+
+#include "lvars.xh"
+#include "int.xh"
+
+int leq_sum_int(int i1, int i2) {
+  return 1;
+}
+
+Value<int>* lub_sum_int(int i1, int i2) {
+  return value (i1 + i2);
+}
+
+Lattice<int>* lattice_sum_int() {
+  return lattice_int(leq_sum_int, lub_sum_int);
+}
+
+Lvar<int>* makeLvar_sum_int() {
+  return makeLvar_int(leq_sum_int, lub_sum_int);
+}
+
+#endif

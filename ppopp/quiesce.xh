@@ -1,0 +1,23 @@
+#ifndef _QUIESCE_XH
+#define _QUIESCE_XH
+
+#include "lvars.xh"
+#include "counter.xh"
+
+Lvar<int>* make_quiescer() {
+  return make_counter();
+}
+
+void done_task(Lvar<int>* quiescer) {
+  inc(quiescer, 1);
+}
+
+void quiesce(Lvar<int>* quiescer, int num_threads) {
+  Lattice<int>* lat = getLattice quiescer;
+  ActivationSet<int>* result = get_counter(quiescer, num_threads);
+  freeSet result;
+  freeLvar quiescer;
+  free(lat);
+}
+
+#endif
