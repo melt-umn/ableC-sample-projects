@@ -33,8 +33,8 @@ serialize.c:	serialize.xc serialize.h ableC.jar
 serialize.o:	serialize.c
 	gcc -c serialize.c
 
-populate_table.out:	populate_table.o serialize.o
-	gcc -o populate_table.out populate_table.o serialize.o  -lpthread -ldl -lsqlite3
+populate_table.out:	populate_table.o serialize.o sqlite3.o
+	gcc -o populate_table.out populate_table.o serialize.o  sqlite3.o -lpthread -ldl
 
 accounting.c:	accounting.xc ableC.jar
 	java -Xss6M -jar ableC.jar accounting.xc -I $(EXTS_BASE)/ableC-sqlite/include
@@ -42,7 +42,7 @@ accounting.c:	accounting.xc ableC.jar
 accounting.o:	accounting.c
 	gcc -c accounting.c
 
-accounting.out:	accounting.o serialize.o
+accounting.out:	accounting.o serialize.o sqlite3.o
 	gcc -o accounting.out accounting.o serialize.o sqlite3.o -lpthread -ldl
 
 sqlite3.o: $(EXTS_BASE)/ableC-sqlite/src/sqlite3.c
