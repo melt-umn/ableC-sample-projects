@@ -4,9 +4,9 @@
 #include <limits.h>
 //#include <setjmp.h>
 #include <signal.h>
-#include <gc.h>
+/* #include <gc.h> */
 
-//#define GC_malloc malloc
+#define GC_malloc malloc
 
 #ifndef _STRING_XH
 #define _STRING_XH
