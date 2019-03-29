@@ -1,0 +1,33 @@
+$ ./example1.out
+example1.xc:67:29: calling fib(5)
+example1.xc:47:6: calling fib(4)
+example1.xc:47:6: calling fib(3)
+example1.xc:47:6: calling fib(2)
+example1.xc:47:6: calling fib(1)
+example1.xc:47:6: returning fib(1) = 1
+example1.xc:48:6: calling fib(0)
+example1.xc:48:6: returning fib(0) = 0
+example1.xc:47:6: returning fib(2) = 1
+example1.xc:48:6: calling fib(1)
+example1.xc:48:6: returning fib(1) = 1
+example1.xc:47:6: returning fib(3) = 2
+example1.xc:48:6: calling fib(2)
+example1.xc:47:6: calling fib(1)
+example1.xc:47:6: returning fib(1) = 1
+example1.xc:48:6: calling fib(0)
+example1.xc:48:6: returning fib(0) = 0
+example1.xc:48:6: returning fib(2) = 1
+example1.xc:47:6: returning fib(4) = 3
+example1.xc:48:6: calling fib(3)
+example1.xc:47:6: calling fib(2)
+example1.xc:47:6: calling fib(1)
+example1.xc:47:6: returning fib(1) = 1
+example1.xc:48:6: calling fib(0)
+example1.xc:48:6: returning fib(0) = 0
+example1.xc:47:6: returning fib(2) = 1
+example1.xc:48:6: calling fib(1)
+example1.xc:48:6: returning fib(1) = 1
+example1.xc:48:6: returning fib(3) = 2
+example1.xc:67:29: returning fib(5) = 5
+fib(2 + 3) = 5
+
