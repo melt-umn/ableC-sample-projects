@@ -1,4 +1,4 @@
-//ableC for PTS
+//DEMO:ableCforPTS
 /* A program that searchs for regular expression matchs in strings
    contained in the nodes of an ADT tree.  This is done in parallel using
    Cilk constructs.
