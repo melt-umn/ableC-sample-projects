@@ -4,21 +4,13 @@ global ide_specification {
   file_extensions = [xc];
   first_line_regex = /\/\/DEMO:ableC for PTS.*/;
 
-  grammar edu:umn:cs:melt:ableC:concretesyntax color nonterminals entity.name.function;
+  --grammar edu:umn:cs:melt:ableC:concretesyntax color nonterminals entity.name.function excluding [Identifier_c];
 
-  grammar edu:umn:cs:melt:exts:ableC:algebraicDataTypes color nonterminals string.quoted;
-  grammar edu:umn:cs:melt:exts:ableC:algebraicDataTypes:allocation:concretesyntax color nonterminals string.quoted;
-  grammar edu:umn:cs:melt:exts:ableC:algebraicDataTypes:datatype:concretesyntax color nonterminals string.quoted;
-  grammar edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax color nonterminals string.quoted;
-  grammar edu:umn:cs:melt:exts:ableC:algebraicDataTypes:silverconstruction color nonterminals string.quoted;
+  grammars under edu:umn:cs:melt:exts:ableC:algebraicDataTypes color nonterminals string.quoted;
 
-  grammar edu:umn:cs:melt:exts:ableC:regex color nonterminals constant.numeric;
-  grammar edu:umn:cs:melt:exts:ableC:regex:regexLiterals color nonterminals constant.numeric;
-  grammar edu:umn:cs:melt:exts:ableC:regex:regexMatching color nonterminals constant.numeric;
-  grammar edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose color nonterminals constant.numeric;
+  grammars under edu:umn:cs:melt:exts:ableC:regex color nonterminals constant.numeric;
+  
+  grammars under edu:umn:cs:melt:exts:ableC:regexPatternMatching color nonterminals variable.parameter;
 
-  grammar edu:umn:cs:melt:exts:ableC:regexPatternMatching color nonterminals variable.parameter;
-
-  grammar edu:umn:cs:melt:exts:ableC:cilk color nonterminals storage.type;
-  grammar edu:umn:cs:melt:exts:ableC:cilk:concretesyntax color nonterminals storage.type;
+  grammars under edu:umn:cs:melt:exts:ableC:cilk color nonterminals storage.type;
 }
