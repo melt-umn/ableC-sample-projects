@@ -1,16 +1,16 @@
-//ableC for PTS
+//ableCforPTS 
 /* A program that searchs for regular expression matchs in strings
    contained in the nodes of an ADT tree.  This is done in parallel using
    Cilk constructs.
  */
 
-//#include <stdio.h>
-//#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-//#include <cilk.h>
-//#include <cilk-cilk2c-pre.h>
+#include <cilk.h>
+#include <cilk-cilk2c-pre.h>
 
-//#include <regex.h>
+#include <regex.h>
 
 typedef datatype Tree  Tree;
 
