@@ -3,7 +3,7 @@ EXTS_BASE?=../../extensions
 
 # The scope of your NPM package. This should be the username of your NPM account
 # or the orginzation you are a member of.
-NPM_USERNAME=joeblanchard
+NPM_USERNAME=INSERT_YOUR_NAME_HERE
 
 # All directories containing grammars that may be included
 GRAMMAR_DIRS=$(ABLEC_BASE)/grammars $(wildcard $(EXTS_BASE)/*/grammars) artifact
