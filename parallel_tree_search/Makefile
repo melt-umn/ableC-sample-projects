@@ -24,11 +24,11 @@ all: pts.out
 
 atom-ide-demo:
 	silver-ableC --treesitter-spec ablec4ptsdemo --treesitter-demo --ide-interface $(SVFLAGS) artifact
-	#sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
-	#sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
-	#gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
-	#slide -I ide --ext demo ideInterface.txt 
-	#gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
+	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
+	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
+	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
+	slide -I ide --ext demo ideInterface.txt 
+	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 update-spec-demo:
 	slide -I ide --ext demo ideInterface.txt
