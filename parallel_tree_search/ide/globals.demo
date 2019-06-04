@@ -4,7 +4,7 @@ global ide_specification {
   file_extensions = [xc];
   first_line_regex = /\/\/DEMO:ableC for PTS.*/;
 
-  --grammar edu:umn:cs:melt:ableC:concretesyntax color nonterminals entity.name.function excluding [Identifier_c];
+  grammar edu:umn:cs:melt:ableC:concretesyntax color nonterminals entity.name.function excluding [Identifier_c];
 
   grammars under edu:umn:cs:melt:exts:ableC:algebraicDataTypes color nonterminals string.quoted;
 

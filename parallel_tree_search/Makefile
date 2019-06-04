@@ -3,7 +3,7 @@ EXTS_BASE?=../../extensions
 
 # The scope of your NPM package. This should be the username of your NPM account
 # or the orginzation you are a member of.
-NPM_USERNAME=INSERT_YOUR_NAME_HERE
+NPM_USERNAME=joeblanchard
 
 # All directories containing grammars that may be included
 GRAMMAR_DIRS=$(ABLEC_BASE)/grammars $(wildcard $(EXTS_BASE)/*/grammars) artifact
@@ -21,20 +21,21 @@ override SLIDEFLAGS+=$(addprefix -I , $(IDE_DIRS))
 all: pts.out
 
 
+
 atom-ide-demo:
-	silver --treesitter-spec ablec4ptsdemo --treesitter-demo --ide-interface $(SVFLAGS) artifact
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
-	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish 
-	slide -I ide --ext demo ideInterface.txt
-	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
+	silver-ableC --treesitter-spec ablec4ptsdemo --treesitter-demo --ide-interface $(SVFLAGS) artifact
+	#sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
+	#sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
+	#gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
+	#slide -I ide --ext demo ideInterface.txt 
+	#gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 update-spec-demo:
 	slide -I ide --ext demo ideInterface.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 atom-ide:
-	silver --treesitter-spec ablec4pts --ide-interface $(SVFLAGS) artifact
+	silver-ableC --treesitter-spec ablec4pts --ide-interface $(SVFLAGS) artifact
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4pts --publish 
