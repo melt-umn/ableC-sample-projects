@@ -58,8 +58,12 @@ pts.c:	pts.xc ableC.jar
 pts.out:	pts.c
 	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \
 		pts.c -o pts.out \
-		-L/usr/local/lib -L/usr/local/lib/cilk -lcilkrt0 -lcilk \
-		-Wl,-rpath,/usr/local/lib -pthread -lm
+		-L/usr/local/lib -L/usr/local/lib/cilk \
+		-Wl,-rpath,/usr/local/lib \
+		-static -lcilkrt0 -lcilk -pthread -lm
+
+#TODO: Statically link ONLY TO LIBCILKRT0 or update our version of libcilkrt0 to
+# work with dynamic linking on modern systems. This is somewhat of an ugly hack.
 
 clean:
 	rm -f *~ *.i *.c *.o *.out *.test *.jar *.copperdump.html build.xml
