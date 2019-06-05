@@ -1,16 +1,16 @@
-//ableCforPTS 
+//ableCforPTS
 /* A program that searchs for regular expression matchs in strings
    contained in the nodes of an ADT tree.  This is done in parallel using
    Cilk constructs.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 
-#include <cilk.h>
-#include <cilk-cilk2c-pre.h>
+//#include <cilk.h>
+//#include <cilk-cilk2c-pre.h>
 
-#include <regex.h>
+//#include <regex.h>
 
 typedef datatype Tree  Tree;
 
@@ -27,11 +27,11 @@ cilk int main (int argv, char **argc) {
     int count;
     Tree *tree ;
     tree =
-      malloc_Fork (malloc_Fork ( malloc_Leaf ("hello"),
-                                 malloc_Leaf ("world"),
+      Fork (Fork ( Leaf ("hello"),
+                                 Leaf ("world"),
                                  "123" ),
-                   malloc_Fork ( malloc_Leaf ("abc000"),
-                                 malloc_Leaf ("wow456wow"),
+                   Fork ( Leaf ("abc000"),
+                                 Leaf ("wow456wow"),
                                  "xyz" ),
                    "9");
 
@@ -59,10 +59,10 @@ cilk int count_matches (Tree *t0) {
             spawn res_t1 = count_matches(t1);
             spawn res_t2 = count_matches(t2);
 
-            if ( str =~ /[1-9]+/ )
+         //  if ( str =~ /[1-9]+/ )
 	       // To use the transparent prefix, use this conditional
 	       // instead of the one above.
-	       // ( RX::match str against /[1-9]+/ )
+	       if ( RX::match str against /[1-9]+/ )
 
                 res_str = 1 ;
             else
