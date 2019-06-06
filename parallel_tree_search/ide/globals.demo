@@ -1,16 +1,14 @@
 global ide_specification {
-  treesitter_parser = @joeblanchard/tree-sitter-ablec4ptsdemo;
-  language_name = ablec4ptsdemo;
+  treesitter_parser = @joeblanchard/tree-sitter-ablec4pts;
+  language_name = ablec4pts;
   file_extensions = [xc];
-  first_line_regex = /\/\/DEMO:ableC for PTS.*/;
+  first_line_regex = /\/\/ableC for PTS.*/;
 
-  grammar edu:umn:cs:melt:ableC:concretesyntax color nonterminals black excluding [Identifier_c];
+  prefix "ADT" {
+    atomMarkupName = comment;
+  };
 
-  grammars under edu:umn:cs:melt:exts:ableC:algebraicDataTypes color nonterminals blue;
-
-  grammars under edu:umn:cs:melt:exts:ableC:regex color nonterminals green;
-  
-  grammars under edu:umn:cs:melt:exts:ableC:regexPatternMatching color nonterminals green;
-
-  grammars under edu:umn:cs:melt:exts:ableC:cilk color nonterminals red;
+  prefix "RX" {
+    atomMarkupName = comment;
+  };
 }
