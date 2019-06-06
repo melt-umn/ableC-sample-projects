@@ -3,7 +3,7 @@ EXTS_BASE?=../../extensions
 
 # The scope of your NPM package. This should be the username of your NPM account
 # or the orginzation you are a member of.
-NPM_USERNAME=INSERT_YOUR_NAME_HERE
+NPM_USERNAME=joeblanchard
 
 # All directories containing grammars that may be included
 GRAMMAR_DIRS=$(ABLEC_BASE)/grammars $(wildcard $(EXTS_BASE)/*/grammars) artifact
@@ -27,11 +27,12 @@ atom-ide-demo:
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
-	slide -I ide --ext demo ideInterface.txt 
+	slide -I ide/extensionOwnColorSpec --ext demo ideInterface.txt 
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 update-spec-demo:
-	slide -I ide --ext demo ideInterface.txt
+	silver-ableC --treesitter-demo --ide-interface $(SVFLAGS) artifact
+	slide -I ide/extensionOwnColorSpec --ext demo ideInterface.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 atom-ide:
@@ -39,11 +40,12 @@ atom-ide:
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4pts --publish 
-	slide $(SLIDEFLAGS) ideInterface.txt
+	slide --ext demo $(SLIDEFLAGS) ideInterface.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 
 update-spec:
-	slide $(SLIDEFLAGS) ideInterface.txt
+	silver-ableC --ide-interface $(SVFLAGS) artifact
+	slide --ext demo $(SLIDEFLAGS) ideInterface.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 	
 
