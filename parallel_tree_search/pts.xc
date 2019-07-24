@@ -4,13 +4,13 @@
    Cilk constructs.
  */
 
-//#include <stdio.h>
-//#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-//#include <cilk.h>
-//#include <cilk-cilk2c-pre.h>
+#include <cilk.h>
+#include <cilk-cilk2c-pre.h>
 
-//#include <regex.h>
+#include <regex.h>
 
 typedef datatype Tree  Tree;
 
@@ -27,11 +27,11 @@ cilk int main (int argv, char **argc) {
     int count;
     Tree *tree ;
     tree =
-      Fork (Fork ( Leaf ("hello"),
-                                 Leaf ("world"),
+      malloc_Fork (malloc_Fork ( malloc_Leaf ("hello"),
+                                 malloc_Leaf ("world"),
                                  "123" ),
-                   Fork ( Leaf ("abc000"),
-                                 Leaf ("wow456wow"),
+                   malloc_Fork ( malloc_Leaf ("abc000"),
+                                 malloc_Leaf ("wow456wow"),
                                  "xyz" ),
                    "9");
 
