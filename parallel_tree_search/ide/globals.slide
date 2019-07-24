@@ -1,3 +1,4 @@
+specification parallelTreeSearchSpecific;
 global ide_specification {
   treesitter_parser = @joeblanchard/tree-sitter-ablec4pts;
   language_name = ablec4pts;

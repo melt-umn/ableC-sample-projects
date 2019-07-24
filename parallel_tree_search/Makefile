@@ -8,7 +8,7 @@ NPM_USERNAME=joeblanchard
 # All directories containing grammars that may be included
 GRAMMAR_DIRS=$(ABLEC_BASE)/grammars $(wildcard $(EXTS_BASE)/*/grammars) artifact
 
-IDE_DIRS=$(ABLEC_BASE)/ide $(wildcard $(EXTS_BASE)/*/ide) ide
+IDE_DIRS=$(ABLEC_BASE)/ide/slide $(wildcard $(EXTS_BASE)/*/ide/slide) ide
 
 # All silver files in included grammars, to be included as dependancies
 GRAMMAR_SOURCES=$(shell find $(GRAMMAR_DIRS) -name *.sv -print0 | xargs -0)
@@ -27,12 +27,12 @@ atom-ide-demo:
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
-	slide -I ide/extensionOwnColorSpec --ext demo ideInterface.txt 
+	slide -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 update-spec-demo:
 	silver-ableC --treesitter-demo --ide-interface $(SVFLAGS) artifact
-	slide -I ide/extensionOwnColorSpec --ext demo ideInterface.txt
+	slide -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 atom-ide:
@@ -40,12 +40,12 @@ atom-ide:
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
 	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4pts --publish 
-	slide --ext demo $(SLIDEFLAGS) ideInterface.txt
+	slide $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 
 update-spec:
 	silver-ableC --ide-interface $(SVFLAGS) artifact
-	slide --ext demo $(SLIDEFLAGS) ideInterface.txt
+	slide $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 	
 
