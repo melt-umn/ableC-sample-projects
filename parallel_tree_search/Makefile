@@ -24,28 +24,24 @@ all: pts.out
 
 atom-ide-demo:
 	silver-ableC --treesitter-spec ablec4ptsdemo --treesitter-demo --ide-interface $(SVFLAGS) artifact
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
+	slide --atom-language-file -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4ptsdemo --publish
-	slide -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 update-spec-demo:
 	silver-ableC --treesitter-demo --ide-interface $(SVFLAGS) artifact
-	slide -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
+	slide --atom-language-file -I ide/extensionOwnColorSpec ideInterface.txt ide/DemoSpecList.txt
 	gen-atom-language-package ablec4ptsdemo $(NPM_USERNAME) 
 
 atom-ide:
 	silver-ableC --treesitter-spec ablec4pts --ide-interface $(SVFLAGS) artifact
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_BlockComment/edu_umn_cs_melt_ableC_concretesyntax_BlockComment/ grammar.js > grammar2.js; mv grammar2.js grammar.js
-	sed s/_edu_umn_cs_melt_ableC_concretesyntax_LineComment/edu_umn_cs_melt_ableC_concretesyntax_LineComment/ grammar.js > grammar2.js ; mv grammar2.js grammar.js
+	slide --atom-language-file --treesitter grammar.js $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
 	gen-treesitter-parser --scope $(NPM_USERNAME) --lang ablec4pts --publish 
-	slide $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 
 update-spec:
 	silver-ableC --ide-interface $(SVFLAGS) artifact
-	slide $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
+	slide --atom-language-file $(SLIDEFLAGS) ideInterface.txt ide/RealisticDemoSpecList.txt
 	gen-atom-language-package ablec4pts $(NPM_USERNAME) 
 	
 
