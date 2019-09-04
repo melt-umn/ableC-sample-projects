@@ -3,10 +3,10 @@
 
 # include "livestock.h"
 
-/** @return serialized representation (null terminated) of an animal (allocated, must be freed) */
-char *serialize_animal(Animal *a);
-/** @return the animal represented by the serialized string; NULL on error */
-Animal *deserialize_animal(const unsigned char *serialized_animal);
+/** @return serialized representation (null terminated) of an animal (malloc-allocated, must be freed) */
+char *serialize_animal(Animal a);
+/** deserialize the animal represented by the serialized string; @return non-zero on error */
+int deserialize_animal(Animal *a, const unsigned char *serialized_animal);
 
 #endif
 
