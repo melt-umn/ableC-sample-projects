@@ -19,13 +19,7 @@ all: accounting.out populate_table.out
 
 $(ABLEC_JAR): $(GRAMMAR_SOURCES)
 	touch $(wildcard $(ARTIFACT)/*.sv)
-	silver -o $@ $(SVFLAGS) $(ARTIFACT)
-
-livestock.c:	livestock.xc livestock.h ableC.jar
-	java -Xss6M -jar ableC.jar livestock.xc
-
-livestock.o:	livestock.c
-	gcc -c livestock.c
+	silver-ableC -o $@ $(SVFLAGS) $(ARTIFACT)
 
 populate_table.c:	populate_table.xc ableC.jar
 	java -Xss6M -jar ableC.jar populate_table.xc -I $(EXTS_BASE)/ableC-sqlite/include
@@ -39,8 +33,8 @@ serialize.c:	serialize.xc serialize.h ableC.jar
 serialize.o:	serialize.c
 	gcc -c serialize.c
 
-populate_table.out:	populate_table.o serialize.o livestock.o
-	gcc -o populate_table.out populate_table.o serialize.o livestock.o  -lpthread -ldl -lsqlite3
+populate_table.out:	populate_table.o serialize.o sqlite3.o
+	gcc -o populate_table.out populate_table.o serialize.o  sqlite3.o -lpthread -ldl
 
 accounting.c:	accounting.xc ableC.jar
 	java -Xss6M -jar ableC.jar accounting.xc -I $(EXTS_BASE)/ableC-sqlite/include
@@ -48,9 +42,11 @@ accounting.c:	accounting.xc ableC.jar
 accounting.o:	accounting.c
 	gcc -c accounting.c
 
-accounting.out:	accounting.o serialize.o livestock.o 
-	gcc -o accounting.out accounting.o serialize.o livestock.o -lsqlite3 -lpthread -ldl
+accounting.out:	accounting.o serialize.o sqlite3.o
+	gcc -o accounting.out accounting.o serialize.o sqlite3.o -lpthread -ldl
 
+sqlite3.o: $(EXTS_BASE)/ableC-sqlite/src/sqlite3.c
+	gcc -c $(EXTS_BASE)/ableC-sqlite/src/sqlite3.c -I$(EXTS_BASE)/ableC-sqlite/include
 
 clean:
 	rm -f *.c *.i *.o accounting.out populate_table.out ableC.jar build.xml farm.db

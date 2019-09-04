@@ -65,7 +65,6 @@ int main() {
 
         total_expenses += expenses;
         total_income += income;
-        freeA(a);
     }
 
     printf ("\nTotals:\n");
