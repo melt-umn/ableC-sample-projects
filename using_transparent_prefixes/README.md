@@ -37,10 +37,11 @@ listed, and `BT::table` will scan as the marking token for the second.
 This specification also contains the following line which indicates
 that writing `table` without a prefix will scan as a the token from
 the first grammar.  It is preferred over the second one,
-`bogus_table`.
+`bogus_table`, and the `Identifier_t` and `TypeName_t` terminals from
+the host language, with which it is also ambiguous.
 
 ```
-  prefer edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t over bogus_table:TableKwd_t;
+  prefer edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t over bogus_table:TableKwd_t, cst:Identifier_t, cst:TypeName_t;
 ```
 
 ## Running the examples
