@@ -20,5 +20,7 @@ translator using
   prefer
    edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:Match_t
   over
-   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
+   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t,
+   edu:umn:cs:melt:ableC:concretesyntax:Identifier_t,
+   edu:umn:cs:melt:ableC:concretesyntax:TypeName_t;
 
