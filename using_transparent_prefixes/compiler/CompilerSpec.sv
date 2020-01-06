@@ -24,8 +24,10 @@ parser extendedParser :: cst:Root {
 
   -- Indicate that 'table' is to be scanned as the terminal from the
   -- `tableExpr` grammar.  It is preferred over the one from the
-  -- `bogus_table` grammar.
-  prefer edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t over bogus_table:TableKwd_t;
+  -- `bogus_table` grammar, and the host identifier terminals with
+  -- which it is also ambiguous.
+  prefer edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t
+    over bogus_table:TableKwd_t, cst:Identifier_t, cst:TypeName_t;
 }
 
 

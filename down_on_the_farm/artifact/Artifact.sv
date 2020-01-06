@@ -16,9 +16,11 @@ translator using
 
   -- Indicate that 'match' is to be scanned as the terminal from the
   -- `algDataTypes` grammar.  It is preferred over the one from the
-  -- `regex` grammar.
+  -- `regex` grammar and other conflicting host terminals.
   prefer
    edu:umn:cs:melt:exts:ableC:algebraicDataTypes:patternmatching:concretesyntax:Match_t
   over
-   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t;
+   edu:umn:cs:melt:exts:ableC:regex:regexMatchingVerbose:RegexMatch_t,
+   edu:umn:cs:melt:ableC:concretesyntax:Identifier_t,
+   edu:umn:cs:melt:ableC:concretesyntax:TypeName_t;
 

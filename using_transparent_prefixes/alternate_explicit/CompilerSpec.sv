@@ -30,15 +30,21 @@ parser extendedParser :: cst:Root {
 
 {- Instead of writing the `prefer` clause
 
-     prefer edu:umn:cs:melt:exts:ableC:tables:tableExpr:Table_t over bogus_table:TableKwd_t;
+   prefer edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t
+     over bogus_table:TableKwd_t, cst:Identifier_t, cst:TypeName_t;
 
    in the parser specification, one can write the resulting
-   disamgiguation function manually, as is done below.  Since these
-   terminals are named directly, the grammars declaring them are
-   imported above.
+   disambiguation functions manually, as is done below (note that
+   a seperate disambiguation function is required for each combination
+   of ambigous terminals.)  Since these terminals are named directly,
+   the grammars declaring them are imported above.
 -}
-disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t
-{ pluck edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t; }
+disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t, cst:Identifier_t, cst:TypeName_t {
+  pluck edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t;
+}
+disambiguate bogus_table:TableKwd_t, edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t, cst:Identifier_t {
+  pluck edu:umn:cs:melt:exts:ableC:tables:concretesyntax:Table_t;
+}
 
 
 {- Similarly, one can define transparent prefix terminals explicitly
