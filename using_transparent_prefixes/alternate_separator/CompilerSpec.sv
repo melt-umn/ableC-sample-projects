@@ -18,10 +18,14 @@ parser extendedParser :: cst:Root {
   -- composition.
   -- Note that bogus_table_separator exports multiple marking terminals
   -- with different prefix seperators, so the prefix must be specified
-  -- specifically for each terminal
+  -- specifically for each terminal.
+  -- (Also note that we could have just specified a prefix for
+  -- TableKwd, or different prefixes for the two.)
 
   edu:umn:cs:melt:exts:ableC:tables prefix with "CT";
-  bogus_table_separator prefix bogus_table_separator:TableKwd_t with "BT";
+  bogus_table_separator
+    prefix bogus_table_separator:TableKwd_t  with "BT"
+    prefix bogus_table_separator:OtherKeyword_t  with "BT";
 
   -- Indicate that 'table' is to be scanned as the terminal from the
   -- `tableExpr` grammar.  It is preferred over the one from the
