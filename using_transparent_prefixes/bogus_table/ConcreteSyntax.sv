@@ -2,7 +2,7 @@ grammar bogus_table;
 
 imports edu:umn:cs:melt:ableC:concretesyntax as cnc;
 
-marking terminal TableKwd_t 'table' lexer classes {Keyword};
+marking terminal TableKwd_t 'table' lexer classes {cnc:Keyword};
 
 disambiguate TableKwd_t, cnc:Identifier_t {
   pluck TableKwd_t;
