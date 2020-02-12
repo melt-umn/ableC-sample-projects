@@ -81,23 +81,21 @@ flexibility.
 
 This example specifies the regular expressions for transparent prefix
 terminal symbols explicitly, thus the prefix separator of the host
-langauge is not used.
+language is not used.
 
 #### `alternate_explicit`
 
 This example explicitly specifies the transparent prefix terminals and
-the disambiugation function that are generated in the simple `compiler`
+the disambiguation function that are generated in the simple `compiler`
 example.
 
 #### `alternate_separator`
 
-This example specifies a *prefix separator* explicitly to override the
-default separator of `::` specified in the host language.
+This example demonstrates the use of transparent prefixes for an extension that
+uses a different prefix seperator than the default separator of `::` specified in
+the host language.
 
-This specification does not yet work.
-See Silver issue #85,
-https://github.com/melt-umn/silver/issues/85.
-
-Specifying a prefix separator in a parser spec doesn't override the
-one specified in the host language.  Instead it clashes with it.
-
+Note that when specifying prefixes as strings, each prefix specification may only
+specify a prefix for a set of terminals with the same prefix separator.  Thus 
+the terminals for which to specify the prefix must be listed explicitly in this
+example, rather than applying automatically to all terminals in the grammar.

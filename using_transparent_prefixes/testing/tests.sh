@@ -21,3 +21,9 @@ java -Xss6M -jar ableC.jar demo.xc
 gcc demo.pp_out.c
 ./a.out
 
+cd ../alternate_separator
+./build.sh $@
+java -Xss6M -jar ableC.jar demo.xc
+gcc demo.pp_out.c
+./a.out
+
