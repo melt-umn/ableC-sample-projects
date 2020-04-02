@@ -1,16 +1,8 @@
-grammar bogus_table;
+grammar bogus_scoped_table;
 
 imports edu:umn:cs:melt:ableC:concretesyntax as cnc;
 
-marking terminal TableKwd_t 'table' lexer classes {cnc:Keyword};
-
-disambiguate TableKwd_t, cnc:Identifier_t {
-  pluck TableKwd_t;
-}
-
-disambiguate TableKwd_t, cnc:Identifier_t, cnc:TypeName_t {
-  pluck TableKwd_t;
-}
+marking terminal TableKwd_t 'table' lexer classes {cnc:Keyword, cnc:Global};
 
 concrete production table_thing_c
 top::cnc:PrimaryExpr_c ::= 'table' x::cnc:Constant_c ',' y::cnc:Constant_c ',' z::cnc:Constant_c

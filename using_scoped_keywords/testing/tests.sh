@@ -9,19 +9,13 @@ java -Xss6M -jar ableC.jar demo.xc
 gcc demo.pp_out.c
 ./a.out
 
-cd ../alternate_terminals
+cd ../conflict
 ./build.sh $@
 java -Xss6M -jar ableC.jar demo.xc
 gcc demo.pp_out.c
 ./a.out
 
-cd ../alternate_explicit
-./build.sh $@
-java -Xss6M -jar ableC.jar demo.xc
-gcc demo.pp_out.c
-./a.out
-
-cd ../alternate_separator
+cd ../preference
 ./build.sh $@
 java -Xss6M -jar ableC.jar demo.xc
 gcc demo.pp_out.c

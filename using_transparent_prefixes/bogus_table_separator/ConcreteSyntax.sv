@@ -1,8 +1,12 @@
-grammar bogus_table;
+grammar bogus_table_separator;
 
 imports edu:umn:cs:melt:ableC:concretesyntax as cnc;
 
-marking terminal TableKwd_t 'table' lexer classes {cnc:Keyword};
+lexer class OtherSeperatorThings prefix separator "@";
+
+marking terminal TableKwd_t 'table' lexer classes {OtherSeperatorThings};
+
+marking terminal OtherKeyword_t 'blah' lexer classes {cnc:Keyword, cnc:Global};
 
 disambiguate TableKwd_t, cnc:Identifier_t {
   pluck TableKwd_t;
@@ -16,6 +20,12 @@ concrete production table_thing_c
 top::cnc:PrimaryExpr_c ::= 'table' x::cnc:Constant_c ',' y::cnc:Constant_c ',' z::cnc:Constant_c
 {
   top.ast = table_thing(x.ast, y.ast, z.ast, location=top.location);
+}
+
+concrete production other_thing_c
+top::cnc:PrimaryExpr_c ::= 'blah' x::cnc:Constant_c
+{
+  top.ast = x.ast;
 }
 
 
