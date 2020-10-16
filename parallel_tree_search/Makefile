@@ -22,7 +22,7 @@ pts.c:	pts.xc ableC.jar
 	java -Xss6M -jar ableC.jar pts.xc -I/usr/local/include/cilk
 
 pts.out:	pts.c
-	gcc -xc -I/usr/local/include/cilk -D__REENTRANT -O2 \
+	gcc -xc -no-pie -I/usr/local/include/cilk -D__REENTRANT -O2 \
 		pts.c -o pts.out \
 		-L/usr/local/lib -L/usr/local/lib/cilk -lcilkrt0 -lcilk \
 		-Wl,-rpath,/usr/local/lib -pthread -lm
