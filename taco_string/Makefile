@@ -18,7 +18,7 @@ XC_INCLUDE_SOURCES=$(foreach dir,$(XC_INCLUDE_DIRS),$(wildcard $(dir)/*.*h))
 # Flags passed to ableC including the appropriate directories
 override XCFLAGS+=$(addprefix -I,$(XC_INCLUDE_DIRS))
 
-all: lbnl-example.out
+all: lbnl-example.test
 
 ableC.jar: $(GRAMMAR_SOURCES)
 	touch artifact/Artifact.sv
@@ -33,7 +33,9 @@ lbnl-example.o: lbnl-example.c
 lbnl-example.out: lbnl-example.o
 	gcc -v -pthread lbnl-example.o -lgc -o lbnl-example.out
 
-
+lbnl-example.test: lbnl-example.out
+	./lbnl-example.out
+	touch lbnl-example.test
 
 clean:
 	rm -f *~ *.i *.c *.o *.out *.test *.jar *.copperdump.html build.xml
