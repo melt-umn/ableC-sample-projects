@@ -7,7 +7,7 @@ library "github.com/melt-umn/jenkins-lib"
 melt.setProperties(silverBase: true, ablecBase: true, silverAblecBase: true)
 
 def extension_name = 'ableC-sample-projects'
-def extensions = ['ableC-regex-lib', 'ableC-regex-pattern-matching', 'ableC-cilk', 'ableC-sqlite', 'ableC-condition-tables', 'ableC-algebraic-data-types', 'ableC-string', 'tensor-algebra']
+def extensions = ['ableC-regex-lib', 'ableC-regex-pattern-matching', 'ableC-cilk', 'ableC-sqlite', 'ableC-condition-tables', 'ableC-algebraic-data-types', 'ableC-string', 'ableC-tensor-algebra']
 
 melt.trynode(extension_name) {
   def newenv
