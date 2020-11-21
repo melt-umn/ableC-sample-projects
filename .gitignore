@@ -3,6 +3,7 @@ ableC.jar
 build.xml
 *.c
 *.out
+*.test
 *.i
 *.o
 *.gen_cpp
