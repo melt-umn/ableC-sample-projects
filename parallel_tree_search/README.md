@@ -13,25 +13,25 @@ them in ``/usr/local``.
 
 1. Build the `ableC` compiler. This creates `ableC.jar`.
    ```
-  % make ableC.jar
+   % make ableC.jar
    ```
 
 2. Compile the sample program. This uses `ableC.jar` to translate the
    user-written extended C `pts.xc` to plain C as `pts.c`, then further uses gcc
    to create the executable `pts.out`.
    ```
-  % make all
+   % make all
    ```
 
 3. Run the sample program that counts the nodes in a binary tree whose values
    match a given regular expression.
    ```
-  % ./pts.out
+   % ./pts.out
    ```
 
 4. Run the sample program that in parallel by using `-nproc` option
    specifies the number of threads to run in parallel.
    ```
-  % ./pts.out -nproc 4
+   % ./pts.out -nproc 4
    ```
 
