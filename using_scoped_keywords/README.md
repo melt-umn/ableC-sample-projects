@@ -16,12 +16,12 @@ To use each of these, change into the directory and then
 
 1. build the `ableC` compiler
    ```
-  % ./build.sh --clean
+   % ./build.sh --clean
    ```
 
 2. use it on the sample program
    ```
-  % java -jar ableC.jar demo.xc
+   % java -jar ableC.jar demo.xc
    ```
 
 3. compile the resulting C program
