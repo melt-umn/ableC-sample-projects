@@ -27,20 +27,21 @@ Programming: Concepts and Experiences (GPCE '17) ACM, 13 pages.
 
 ## Running the examples
 
-1. Build the `ableC` compiler. This creates `ableC.jar`.
+1. Build the `ableC` compiler. This creates `ableC.jar`.   
    ```
-  % make ableC.jar
+   % make ableC.jar
    ```
+   
 
 2. Compile the sample program. This uses `ableC.jar` to translate the
    user-written extended C `tq.xc` to plain C as `tq.c`, then further uses gcc
    to create the executable `tq.out`.
    ```
-  % make all
+   % make all
    ```
 
 3. Run the sample program.
    ```
-  % ./tq.out
+   % ./tq.out
    ```
 
