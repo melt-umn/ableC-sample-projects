@@ -21,7 +21,8 @@ melt.trynode(extension_name) {
   }
   
   stage ("Test") {
-    def examples = ['down_on_the_farm', 'parallel_tree_search', 'taco_string', 'type_qualifiers', 'using_scoped_keywords', 'using_transparent_prefixes']
+    def examples = ['taco_string', 'type_qualifiers', 'using_scoped_keywords', 'using_transparent_prefixes']
+    // Disabled due to cilk library issues: 'down_on_the_farm', 'parallel_tree_search', 
     
     def tasks = [:]
     tasks << examples.collectEntries { t -> [(t): task_example(t, newenv)] }
