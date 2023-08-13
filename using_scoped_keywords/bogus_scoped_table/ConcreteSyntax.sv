@@ -7,7 +7,7 @@ marking terminal TableKwd_t 'table' lexer classes {cnc:Keyword, cnc:Global};
 concrete production table_thing_c
 top::cnc:PrimaryExpr_c ::= 'table' x::cnc:Constant_c ',' y::cnc:Constant_c ',' z::cnc:Constant_c
 {
-  top.ast = table_thing(x.ast, y.ast, z.ast, location=top.location);
+  top.ast = table_thing(x.ast, y.ast, z.ast);
 }
 
 

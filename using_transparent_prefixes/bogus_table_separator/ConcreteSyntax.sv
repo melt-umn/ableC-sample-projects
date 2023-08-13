@@ -19,7 +19,7 @@ disambiguate TableKwd_t, cnc:Identifier_t, cnc:TypeName_t {
 concrete production table_thing_c
 top::cnc:PrimaryExpr_c ::= 'table' x::cnc:Constant_c ',' y::cnc:Constant_c ',' z::cnc:Constant_c
 {
-  top.ast = table_thing(x.ast, y.ast, z.ast, location=top.location);
+  top.ast = table_thing(x.ast, y.ast, z.ast);
 }
 
 concrete production other_thing_c
