@@ -8,7 +8,7 @@ grammar alternate_separator;
  -}
  
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
-import edu:umn:cs:melt:ableC:drivers:parseAndPrint;
+import edu:umn:cs:melt:ableC:drivers:compile;
 
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;

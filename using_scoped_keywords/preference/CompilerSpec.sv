@@ -7,7 +7,7 @@ grammar preference;
  - preference to allow one terminal to be used without a prefix.
  -}
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
-import edu:umn:cs:melt:ableC:drivers:parseAndPrint;
+import edu:umn:cs:melt:ableC:drivers:compile;
 
 parser extendedParser :: cst:Root {
   edu:umn:cs:melt:ableC:concretesyntax;

@@ -9,7 +9,7 @@ grammar alternate_explicit;
  -}
  
 import edu:umn:cs:melt:ableC:concretesyntax as cst;
-import edu:umn:cs:melt:ableC:drivers:parseAndPrint;
+import edu:umn:cs:melt:ableC:drivers:compile;
 
 import edu:umn:cs:melt:exts:ableC:tables ;
 import bogus_table ;
