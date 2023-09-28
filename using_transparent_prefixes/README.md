@@ -60,7 +60,7 @@ To use each of these, change into the directory and then
 
 3. compile the resulting C program
    ```
-   % gcc demo.pp_out.c
+   % gcc demo.c
    ```
 
 4. run the program
